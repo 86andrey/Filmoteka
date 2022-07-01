@@ -4,38 +4,56 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
   export default class MovieApiService {
     constructor() {
       this.searchQuery = '';
-      this.page = 1;
+      this.pageStart = 1;
+      this.pageQuery =1;
     }
   
     async fetchPopular(){
       try{       
-      const url=`${BASE_URL}trending/movie/day?api_key=${API_KEY}`
+      const url=`${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${this.pageStart}`
       const response=  await fetch(url);
       const data = await response.json();
       // console.log(data.results);
       return data.results;
      } catch(error){console.log(error);
       
-          }}
+     }}
     
-     async fetchByQuery(query){
+     async fetchByQuery(searchQuery){
       try{ 
-      const url=`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${this.page}&include_adult=false`
+      const url=`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${this.pageQuery}&include_adult=false`
       const response=  await fetch(url);
-      const data = await response.json();
+      const data = await response.json();g
       // this.incrementPage();
       return data.results;
       } catch(error){console.log(error);
-    
+      }}
+
+      async fetchById(movieId){
+        try{       
+        const url=`${BASE_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`
+        const response=  await fetch(url);
+        const data = await response.json();
+        // console.log(data);
+        return data;
+       } catch(error){console.log(error);
       }}
 
 
-    incrementPage() {
-      this.page += 1;
+    incrementPageStart() {
+      this.pageStart += 1;
+    }
+
+    incrementPageQuery() {
+      this.pageQuery += 1;
     }
   
-    resetPage() {
-      this.page = 1;
+    resetPageStart() {
+      this.pageStart = 1;
+    }
+
+    resetPageQuery() {
+      this.pageQuery = 1;
     }
   
     // get query() {
