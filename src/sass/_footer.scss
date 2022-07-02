@@ -1,0 +1,111 @@
+.footer {
+    height: 100px;
+    padding: 30px 0;
+
+    font-family: 'Roboto';
+    font-size: 14px;
+    text-align: center;
+
+    color: #545454;
+    background-color: #f7f7f7;
+
+    @media screen and (min-width: 768px) {
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+    }
+}
+
+footer>div:not(:last-child) {
+    margin-bottom: 10px;
+
+    @media screen and (min-width: 768px) {
+        margin-bottom: 0;
+    }
+}
+
+
+.footer-modal-btn {
+    padding: 0;
+    border: none;
+
+    color: #545454;
+    background-color: #f7f7f7;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 200ms linear;
+
+    &:hover,
+    &:focus {
+        color: #ff6b01;
+    }
+}
+
+.heart {
+    display: inline-block;
+    position: relative;
+    width: 24px;
+    height: 11px;
+    transform: rotate(45deg);
+
+
+}
+
+.heart div {
+    top: 2px;
+    left: 10px;
+    position: relative;
+    width: 7px;
+    height: 7px;
+    background: #FF6B01;
+    ;
+    animation: heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.heart div:after,
+.heart div:before {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 7px;
+    height: 7px;
+    background: #FF6B01;
+    ;
+}
+
+.heart div:before {
+    left: -7px;
+    border-radius: 50% 0 0 50%;
+}
+
+.heart div:after {
+    top: -7px;
+    border-radius: 50% 50% 0 0;
+}
+
+@keyframes heart {
+    0% {
+        transform: scale(0.95) skew (20deg);
+    }
+
+    5% {
+        transform: scale(1.4);
+    }
+
+    39% {
+        transform: scale(1.6);
+    }
+
+    45% {
+        transform: scale(1.5);
+    }
+
+    60% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(0.9);
+    }
+}
