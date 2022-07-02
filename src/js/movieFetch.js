@@ -4,31 +4,43 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
   export default class MovieApiService {
     constructor() {
       this.searchQuery = '';
-      this.pageStart = 1;
-      this.pageQuery =1;
+      this.page = 1;
+      
     }
   
+    // метод получения массива популярных фильмов. Total_pages = 1000 по дефолту.
     async fetchPopular(){
       try{       
-      const url=`${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${this.pageStart}`
+      const url=`${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${this.page}`
       const response=  await fetch(url);
       const data = await response.json();
-      // console.log(data.results);
+      console.log(data);
       return data.results;
      } catch(error){console.log(error);
-      
-     }}
+    }}
     
+    // метод получения массива фильмов по запросу.
      async fetchByQuery(searchQuery){
       try{ 
-      const url=`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${this.pageQuery}&include_adult=false`
+      const url=`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${this.page}&include_adult=false`
       const response=  await fetch(url);
-      const data = await response.json();g
+      const data = await response.json();
       // this.incrementPage();
       return data.results;
       } catch(error){console.log(error);
       }}
 
+    // метод получения колличества страниц в зависимости от запроса
+    async getPagesCountByQuery(searchQuery){
+      try{ 
+      const url=`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false`
+      const response=  await fetch(url);
+      const data = await response.json();
+      return data.total_pages;
+      } catch(error){console.log(error);
+      }}
+
+    // метод получения инфо о фильме по айдишке
       async fetchById(movieId){
         try{       
         const url=`${BASE_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`
@@ -39,23 +51,21 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
        } catch(error){console.log(error);
       }}
 
+    // метод присвоения странице номера из пагинации
+    setCurrentPage(page){
+    this.page=page;
+     }
 
-    incrementPageStart() {
-      this.pageStart += 1;
-    }
-
-    incrementPageQuery() {
-      this.pageQuery += 1;
-    }
-  
-    resetPageStart() {
-      this.pageStart = 1;
+    // метод добавления по одной странице
+    incrementPage() {
+      this.page += 1;
     }
 
-    resetPageQuery() {
-      this.pageQuery = 1;
+    // метод сброса нумерации страниц на первую
+    resetPage() {
+      this.page = 1;
     }
-  
+
     // get query() {
     //   return this.searchQuery;
     // }
