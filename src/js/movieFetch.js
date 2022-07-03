@@ -1,6 +1,7 @@
 const API_KEY = '03779c52c93ea63ebe46db37a334d7d8';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
+
   export default class MovieApiService {
     constructor() {
       this.searchQuery = '';
@@ -29,7 +30,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
       return data.results;
       } catch(error){console.log(error);
       }}
-
+   
     // метод получения колличества страниц в зависимости от запроса
     async getPagesCountByQuery(searchQuery){
       try{ 
