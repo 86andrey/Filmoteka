@@ -6,8 +6,8 @@
     font-size: 14px;
     text-align: center;
 
-    color: #545454;
-    background-color: #f7f7f7;
+    color: $footer-text;
+    background-color: $footer-background;
 
     @media screen and (min-width: 768px) {
         height: 80px;
@@ -17,28 +17,45 @@
     }
 }
 
-footer>div:not(:last-child) {
-    margin-bottom: 10px;
+.footer__info {
+    display: flex;
+    justify-content: center;
+}
 
-    @media screen and (min-width: 768px) {
-        margin-bottom: 0;
+.footer__text {
+    @media screen and (max-width: 767px) {
+        margin-bottom: 10px;
     }
 }
 
+div.container {
+    @media screen and (min-width: 768px) {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.footer__info--text~.heart {
+    margin-right: 5px;
+}
+
+.footer__info--text {
+    margin-right: 5px;
+}
 
 .footer-modal-btn {
     padding: 0;
     border: none;
-
-    color: #545454;
-    background-color: #f7f7f7;
+    margin-left: 5px;
+    color: $footer-text;
+    background-color: $footer-background;
     text-decoration: underline;
     cursor: pointer;
     transition: color 200ms linear;
 
     &:hover,
     &:focus {
-        color: #ff6b01;
+        color: $header-button-color;
     }
 }
 
@@ -47,9 +64,7 @@ footer>div:not(:last-child) {
     position: relative;
     width: 24px;
     height: 11px;
-    transform: rotate(45deg);
-
-
+    transform: rotate(45deg)
 }
 
 .heart div {
@@ -58,7 +73,7 @@ footer>div:not(:last-child) {
     position: relative;
     width: 7px;
     height: 7px;
-    background: #FF6B01;
+    background: $header-button-color;
     ;
     animation: heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
@@ -70,7 +85,7 @@ footer>div:not(:last-child) {
     display: block;
     width: 7px;
     height: 7px;
-    background: #FF6B01;
+    background: $header-button-color;
     ;
 }
 
@@ -86,7 +101,7 @@ footer>div:not(:last-child) {
 
 @keyframes heart {
     0% {
-        transform: scale(0.95) skew (20deg);
+        transform: scale(0.95);
     }
 
     5% {
