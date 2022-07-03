@@ -1,7 +1,7 @@
 import MovieApiService from './js/movieFetch.js';
 
-// для примера - через экземпляр можем достучаться до свойства
-const popularMovie = new MovieApiService();
+// объявляем экземпляр класса
+const movie = new MovieApiService();
 
-// вызываем промис в формате JSON
-popularMovie.fetchPopular();
+// вызываем на этом экземпляре нужный метод (пример=>)
+movie.fetchPopular();
