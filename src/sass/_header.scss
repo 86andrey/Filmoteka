@@ -1,16 +1,17 @@
 .site-header {
-    position: absolute;
-    top: 0;
+    // position: absolute;
+    // top: 0;
     background: $header-background;
     background-image: url("../images/header/abstract-background-with-red-lines 1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 
-    overflow: hidden;
-    z-index: 15;
+    // overflow: hidden;
+    // z-index: 15;
 
     height: 216px;
-    width: 1280px;
+    // width: 1280px;
+    padding-top: 45px;
 }
 
 .site-header-container {
@@ -18,7 +19,7 @@
     justify-content: space-between;
     align-items: center;
 
-    margin-top: 45px;
+    // margin-top: 45px;
     margin-left: 32px;
     margin-right: 32px;
 }
