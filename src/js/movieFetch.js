@@ -43,12 +43,12 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
       }}
    
     // метод получения колличества страниц в зависимости от запроса
-    async getPagesCountByQuery(searchQuery){
+    async getCountByQuery(searchQuery){
       try{ 
       const url=`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false`
       const response=  await fetch(url);
       const data = await response.json();
-      return data.total_pages;
+      return data.total_results;
       } catch(error){console.log(error);
       }}
 
