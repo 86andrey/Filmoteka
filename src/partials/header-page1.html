@@ -12,25 +12,27 @@
         <nav class="header-nav-container">
             <ul class="header-nav__list">
                 <li class="header-nav__item"><a href="" class="header-nav__link header-nav__link--current">HOME</a></li>
-                <li class="header-nav__item"><a href="" class="header-nav__link header-nav__link--last">MY LIBRARY</a>
+                <li class="header-nav__item"><a href="./library.html" class="header-nav__link header-nav__link--last">MY LIBRARY</a>
                 </li>
             </ul>
         </nav>
 
     </div>
 
-    <div class="header-input-container">
+
+    <form class="header-input-container">
         <input type="text" id="search-box" class="search-box-input" placeholder="Movie search" />
-        <button type="search" class="header-input-search-button">
+        <button type="submit" class="header-input-search-button">
            <svg width="12" height="12" class="search-box-input-icon">
             <use href="./images/icons.svg#icon-search"></use>
         </svg>
         </button>
         
-    </div>
+   </form>
 
     <div class="header-error-container">
-Search result not successful. Enter the correct movie name and
+<p> Search result not successful. Enter the correct movie name and try again </p>
     </div>
+
 
 </header>
