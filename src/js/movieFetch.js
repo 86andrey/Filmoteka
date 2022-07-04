@@ -30,6 +30,17 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
       return data.results;
       } catch(error){console.log(error);
       }}
+
+    // метода получения массива жанров
+    async getGenres(){
+      try{ 
+      const url=`${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`
+      const response=  await fetch(url);
+      const data = await response.json();
+      console.log(data.genres);
+      return data.genres;
+      } catch(error){console.log(error);
+      }}
    
     // метод получения колличества страниц в зависимости от запроса
     async getPagesCountByQuery(searchQuery){
