@@ -143,3 +143,17 @@
     right: 0;
     display: inline-block;
 }
+
+// Добавила кнопку
+.header-input-btn{
+    position: absolute;
+    z-index: 3;
+   background-color: transparent;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;  
+}
