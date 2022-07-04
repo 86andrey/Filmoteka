@@ -32,5 +32,7 @@ async function renderCard() {
 }
 renderCard()
 
+movie.getGenres();
+
 
 // Sergey--------------------------------------
