@@ -17,17 +17,22 @@
             </ul>
         </nav>
 
-
     </div>
 
-  
 
     <form class="header-input-container">
         <input type="text" id="search-box" class="search-box-input" placeholder="Movie search" />
-        <button type="submit"  class="header-input-btn"><svg width="12" height="12" class="search-box-input-icon">
+        <button type="submit" class="header-input-search-button">
+           <svg width="12" height="12" class="search-box-input-icon">
             <use href="./images/icons.svg#icon-search"></use>
         </svg>
-    </button>
-    </form>
+        </button>
+        
+   </form>
+
+    <div class="header-error-container">
+<p> Search result not successful. Enter the correct movie name and try again </p>
+    </div>
+
 
 </header>
