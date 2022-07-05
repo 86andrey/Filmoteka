@@ -98,7 +98,7 @@ function makeMarkupModal({poster_path, id, original_title, release_date, genre_i
       <button type="button" class="modal__btn-add">add to Watched</button>
       <button type="button" class="modal__btn-add">add to queue</button>
     </div>
-  </div> -->`
+  </div>`
 }
 
 
