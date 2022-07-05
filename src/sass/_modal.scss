@@ -1,0 +1,187 @@
+//прячем модалку
+.modal__card-overlay.is-hidden{
+    opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.backdrop{
+    background: rgba(144, 144, 144, 0.5);
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 150px;
+}
+.modal {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 806px;
+    height: 558px;
+    background: rgb(255, 255, 255);
+    padding: 40px 12px;
+    display: flex;
+}
+.modal-close-btn{
+    position: absolute;
+        right: 8px;
+        top: 8px;
+        width: 30px;
+        height: 30px;
+        background: inherit;
+        border: none;
+        box-sizing: border-box;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 2;
+}
+.modal-close-btn__icon {
+    width: 14px;
+    height: 14px;
+    fill: #000;
+    z-index: 5;
+}
+.modal-film-img {
+    background: rgb(180, 180, 180);
+    width: 375px;
+    height: 478px;
+    margin-right: 16px;
+}
+.modal-film-name {
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 35px;
+        color: #000000;
+}
+.modal__open {
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+.modal__card-overlay {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(100, 100, 100, 0.5);
+    transition: all 0.5s ease-in-out;
+}
+// анімація виїзду модалки
+// .modal__card-overlay.is-hidden .modal__card-content{
+//     transform: translate(-50%, 100%);
+// }
+// .modal__card-content--active {
+//     display: block;
+// }
+// .modal__card-overlay--active {
+//     opacity: 1;
+//     visibility: visible;
+//     transition: all 0.5s ease-in-out;
+//     display: block;
+// }
+.modal__card-content {
+    @media screen and(max-width:767px) {
+        width: 806px;
+        eight: 558px;
+        padding: 20px;
+        position: relative;
+        background-color: white;
+        border-radius: 5px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    @media screen and(min-width: 768px) and (max-width: 1023px) {
+        display: flex;
+        width: 704px;
+            height: 552px;
+        padding: 40px 72px 40px 36px;
+        position: relative;
+        background-color: white;
+        border-radius: 5px;
+    }
+    @media screen and(min-width:1024px) {
+        display: flex;
+        width: 806px;
+        min-height: 558px;
+        padding: 40px 12px;
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+.modal__close {
+    @media screen and(max-width:767px) {
+        position: relative;
+        top: 0;
+        left: 95%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    @media screen and(min-width: 768px) and (max-width: 1023px) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    @media screen and(min-width:1024px) {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        cursor: pointer;
+        background: orange;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.modal__close-svg {
+    width: 14px;
+    height: 14px;
+}
+.modal__img {
+    @media screen and(min-width: 768px) and (max-width: 1023px) {
+        width: 264px;
+        height: 374px;
+        margin-right: 68px;
+    }
+    @media screen and(min-width:1024px) {
+        width: 375px;
+        height: 478px;
+        margin-right: 16px;
+    }
+}
+.modal__info {
+    @media screen and(max-width:767px) {
+        width: 240px;
+    }
+    @media screen and(min-width: 768px) and (max-width: 1023px) {
+        width: 264px;
+    }
+    @media screen and(min-width:1024px) {
+        width: 391px;
+    }
+}
+.discription__modal {
+    list-style: none;
+    padding: 0;
+    &>*:not(:last-child) {
+        margin-bottom: 8px;
+    }}
