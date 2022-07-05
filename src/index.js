@@ -2,7 +2,7 @@ import MovieApiService from './js/movieFetch.js';
 import { renderMarkupPopular, renderMarkupByQ,  openModal } from './js/renderFunctions.js';
 
 //скрипт меняет стили кнопок в хедере
-import './js/header_styles.js';
+//import './js/header_styles.js';
 
 // объявляем экземпляр класса и елементы
 // const movie = new MovieApiService();
