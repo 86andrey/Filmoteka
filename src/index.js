@@ -25,7 +25,8 @@ catch{error=>console.log(error)};
 // Sergey--------------------------------------
 renderMarkupPopular()
 
-
+//скрипт меняет стили кнопок в хедере
+import './js/header_styles.js';
 
 
 // Sergey--------------------------------------
