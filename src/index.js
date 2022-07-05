@@ -1,13 +1,10 @@
 import MovieApiService from './js/movieFetch.js';
-import { renderMarkupPopular, renderMarkupByQ } from './js/renderFunctions.js';
+import { renderMarkupPopular, renderMarkupByQ,  openModal } from './js/renderFunctions.js';
 
 // объявляем экземпляр класса и елементы
-const movie = new MovieApiService();
+// const movie = new MovieApiService();
 const form = document.querySelector('.header-input-container');
 const input = document.querySelector('#search-box');
-
-// вызываем на этом экземпляре нужный метод (пример=>)
-movie.fetchPopular();
 
 //функция поиска по запросу
 form.addEventListener('submit', onBtnSearch);
@@ -25,7 +22,31 @@ catch{error=>console.log(error)};
 // Sergey--------------------------------------
 renderMarkupPopular()
 
-
-
-
 // Sergey--------------------------------------
+
+
+//набросок модалки
+const modal=document.querySelector('.modal__card-overlay');
+const containerCard = document.querySelector('.container-card')
+
+containerCard.addEventListener('click', (event)=>{
+    const movieClick =event.path[2]
+    if(!movieClick.classList.contains('container-card_single-card')){
+        return}
+    modal.classList.remove('is-hidden')
+    const movieId =movieClick.dataset.id;
+    openModal(movieId);
+    });
+
+// закрытие модалки
+
+
+//  function modalShow(event) {
+//     //   if (event.target.className !== "DIV") {
+//     //     return;
+//     //   }
+//     console.log(event);
+//     //   const selectedColor = event.target.dataset.color;
+//     //   output.textContent = `Selected color: ${selectedColor}`;
+//     //   output.style.color = selectedColor;
+//     }
