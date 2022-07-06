@@ -20,7 +20,7 @@ export async function renderMarkupByQ(searchQuery) {
 }
         
 function makeMarkup(array) {
-  return array.results.map(({ poster_path, id, original_title, release_date, genre_ids } ) => {
+  return array.map(({ poster_path, id, original_title, release_date, genre_ids } ) => {
     const newReleaseDate = release_date.split('-')[0];
     // const genres = movie.getGenres().then(data => data);
     
@@ -64,8 +64,7 @@ function makeMarkup(array) {
           {id: 10752, name: 'War' },
           {id: 37, name: 'Western' },
     ] 
-    console.log(ganresArray);
-     
+         
       
     const genreMain = genre_ids.reduce((acc, id) => {
       const movieGenre = ganresArray.filter((genre) => genre.id === id)[0];
@@ -73,6 +72,13 @@ function makeMarkup(array) {
       return acc.slice(0, 3);
       }, [])
     console.log(genreMain.length);
+    if (genreMain.length === 3) {
+         genreMain.splice(2, 1, "Other");
+    }
+    // if (genreMain.length === 0) {
+    //    genreMain = "No janre";
+    // }
+   
       
         return `
                   <div class="container-card_single-card" data-id="${id}" >
@@ -82,7 +88,7 @@ function makeMarkup(array) {
                     <div class="info">
                       <h3 class="info_title">${original_title}</h3>
                       <p class="info_details">
-                          ${genreMain} | ${newReleaseDate}
+                          ${genreMain.join(", ")} | ${newReleaseDate}
                       </p>
                     </div>
                   </div> 

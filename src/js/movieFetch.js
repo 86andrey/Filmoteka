@@ -17,7 +17,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
       const data = await response.json();
       console.log(data);
         // return data.results;
-        return data;
+        return data.results;
      } catch(error){console.log(error);
     }}
     
