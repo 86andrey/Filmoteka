@@ -8,7 +8,7 @@ const containerModal = document.querySelector('.modal__card-content')
 
 export async function renderMarkupPopular() {
     const array = await movie.fetchPopular();
-    // console.log(array);
+    console.log(array);
     containerCard.insertAdjacentHTML('beforeend', makeMarkup(array));
 }
 
@@ -18,10 +18,62 @@ export async function renderMarkupByQ(searchQuery) {
     containerCard.innerHTML=await makeMarkup(array);
     // containerCard.insertAdjacentHTML('beforeend', await makeMarkup(array));
 }
+        
+function makeMarkup(array) {
+  return array.results.map(({ poster_path, id, original_title, release_date, genre_ids } ) => {
+    const newReleaseDate = release_date.split('-')[0];
+    // const genres = movie.getGenres().then(data => data);
+    
+    
+    
+      // function genresChanged(){
+      //   if (genre_ids.length === 0) {
+      //     return (genre_ids = 'Other');
+      //   }
+      //   genre_ids = newGenre_ids
+      //     .map(genreID => (genreID = genres[genreID]))
+      //     .slice(0, 2)
+      //     .join(', ');
 
-function makeMarkup(array){
-    return array.map(({ poster_path, id, original_title, release_date, genre_ids }) => {
-        // const newReleaseDate = release_date.split('-')[0];
+      //   return;
+      // }     
+      // console.log(array.results)
+    // const genreMain = array.results.flatMap(item => {
+    //     if(item.){}
+    //     console.log(item)
+    //   })
+      // console.log(genreMain)
+    const ganresArray = [
+          {id: 28, name: 'Action' },
+          {id: 12, name: 'Adventure'},
+          {id: 16, name: 'Animation'},
+          {id: 35, name: 'Comedy'},
+          {id: 80, name: 'Crime'},
+          {id: 99, name: 'Documentary'},
+          {id: 18, name: 'Drama'},
+          {id: 10751, name: 'Family'},
+          {id: 14, name: 'Fantasy'},
+          {id: 36, name: 'History'},
+          {id: 27, name: 'Horror'},
+          {id: 10402, name: 'Music'},
+          {id: 9648, name: 'Mystery'},
+          {id: 10749, name: 'Romance'},
+          {id: 878, name: 'Science Fiction'},
+          {id: 10770, name: 'TV Movie'},
+          {id: 53, name: 'Thriller' },
+          {id: 10752, name: 'War' },
+          {id: 37, name: 'Western' },
+    ] 
+    console.log(ganresArray);
+     
+      
+    const genreMain = genre_ids.reduce((acc, id) => {
+      const movieGenre = ganresArray.filter((genre) => genre.id === id)[0];
+      acc.push(movieGenre.name);
+      return acc.slice(0, 3);
+      }, [])
+    console.log(genreMain.length);
+      
         return `
                   <div class="container-card_single-card" data-id="${id}" >
                     <div class="poster">
@@ -30,7 +82,7 @@ function makeMarkup(array){
                     <div class="info">
                       <h3 class="info_title">${original_title}</h3>
                       <p class="info_details">
-                          ${genre_ids} | ${release_date}
+                          ${genreMain} | ${newReleaseDate}
                       </p>
                     </div>
                   </div> 

@@ -16,7 +16,8 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
       const response=  await fetch(url);
       const data = await response.json();
       console.log(data);
-      return data.results;
+        // return data.results;
+        return data;
      } catch(error){console.log(error);
     }}
     
@@ -37,8 +38,8 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
       const url=`${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`
       const response=  await fetch(url);
       const data = await response.json();
-      console.log(data.genres);
-      return data.genres;
+      console.log(data);
+      return data;
       } catch(error){console.log(error);
       }}
    
