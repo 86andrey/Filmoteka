@@ -5,68 +5,6 @@
   visibility: hidden;
 }
 
-.backdrop{
-    background: rgba(144, 144, 144, 0.5);
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    padding-top: 150px;
-}
-.modal {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 806px;
-    height: 558px;
-    background: rgb(255, 255, 255);
-    padding: 40px 12px;
-    display: flex;
-}
-.modal-close-btn{
-    position: absolute;
-        right: 8px;
-        top: 8px;
-        width: 30px;
-        height: 30px;
-        background: inherit;
-        border: none;
-        box-sizing: border-box;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        z-index: 2;
-}
-.modal-close-btn__icon {
-    width: 14px;
-    height: 14px;
-    fill: #000;
-    z-index: 5;
-}
-.modal-film-img {
-    background: rgb(180, 180, 180);
-    width: 375px;
-    height: 478px;
-    margin-right: 16px;
-}
-.modal-film-name {
-    font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 30px;
-        line-height: 35px;
-        color: #000000;
-}
-.modal__open {
-    border: none;
-    cursor: pointer;
-    background-color: black;
-    padding: 10px;
-    color: white;
-}
 .modal__card-overlay {
     position: fixed;
     top: 0;
@@ -74,6 +12,7 @@
     height: 100vh;
     background-color: rgba(100, 100, 100, 0.5);
     transition: all 0.5s ease-in-out;
+    z-index: 20;
 }
 // анімація виїзду модалки
 // .modal__card-overlay.is-hidden .modal__card-content{
@@ -111,7 +50,7 @@
     @media screen and(min-width:1024px) {
         display: flex;
         width: 806px;
-        min-height: 558px;
+        height: 558px;
         padding: 40px 12px;
         position: absolute;
         background-color: rgb(255, 255, 255);
@@ -152,10 +91,12 @@
         justify-content: center;
     }
 }
-.modal__close-svg {
-    width: 14px;
-    height: 14px;
-}
+
+// .modal__close-svg{
+//     fill: #000000;
+//     z-index: 50;
+// }
+
 .modal__img {
     @media screen and(min-width: 768px) and (max-width: 1023px) {
         width: 264px;
@@ -164,24 +105,109 @@
     }
     @media screen and(min-width:1024px) {
         width: 375px;
-        height: 478px;
-        margin-right: 16px;
+        // height: 478px;
+        margin-right: 20px;
+        border-radius: 10px;
     }
 }
-.modal__info {
-    @media screen and(max-width:767px) {
-        width: 240px;
-    }
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
-        width: 264px;
-    }
-    @media screen and(min-width:1024px) {
-        width: 391px;
-    }
+
+.modal__info-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: #000000;
+    text-transform: uppercase;
 }
+
 .discription__modal {
-    list-style: none;
-    padding: 0;
-    &>*:not(:last-child) {
-        margin-bottom: 8px;
-    }}
+    margin-right: 85px;
+}
+
+.modal__info-block {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.discription__modal-item{
+    margin-bottom: 8px;
+}
+.discription__modal-title{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8C8C8C;
+}
+.discription__modal-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+.discription__modal-text-vote{
+    background: #FF6B01;
+    border-radius: 5px;
+    padding: 1px 10px;
+    line-height: 14px;
+    color: #FFFFFF;
+}
+.discription__modal-text-slash{
+    color: #8C8C8C;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.discription__modal-text-votes{
+    background: #F7F7F7;
+    border-radius: 5px;
+    padding: 1px 10px;
+    line-height: 14px;
+}
+
+.about__modal{
+    margin-bottom: 20px;
+}
+
+.about__modal-title{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 8px;
+}
+.about__modal-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.modal__btn-add{
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        width: 136px;
+        height: 44px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background: #fff;
+    text-transform: uppercase;
+}
+.modal__btn-1{
+    margin-left: 4px;
+    margin-right: 15px;
+}
