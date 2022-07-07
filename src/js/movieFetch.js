@@ -1,7 +1,6 @@
 const API_KEY = '03779c52c93ea63ebe46db37a334d7d8';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
-
   export default class MovieApiService {
     constructor() {
       this.searchQuery = '';
@@ -27,7 +26,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
       const url=`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${this.page}&include_adult=false`
       const response=  await fetch(url);
       const data = await response.json();
-      // this.incrementPage();
+      
       return data.results;
       } catch(error){console.log(error);
       }}
