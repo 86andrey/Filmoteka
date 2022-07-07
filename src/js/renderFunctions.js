@@ -1,4 +1,5 @@
 import MovieApiService from './movieFetch';
+import { storage } from './storage';
 const movie = new MovieApiService();
 
 const containerCard = document.querySelector('.container-card')
@@ -112,6 +113,92 @@ export async function openModal(movieId) {
     const modal=document.querySelector('.modal__card-overlay');
   modalCloseBtn.addEventListener('click', () => { modal.classList.add('is-hidden') })
   
+  const addToWatched = document.querySelector(".modal__btn-1add")
+  const addToQueue = document.querySelector(".modal__btn-2add")
+  const removeFromWatched = document.querySelector(".modal__btn-1remove")
+  const removeFromQueue = document.querySelector(".modal__btn-2remove")
+  
+  
+  // ФУНКЦИИ ДОБАВЛЕНИЯ И ПЕРЕЗАПИСИ В LOCALSTORAGE
+  
+  addToWatched.addEventListener('click', async () => {
+    const data = await movie.fetchById(movieId)
+    const result = storage.readItem("watched", []);
+    const parsing = storage.readItem('qu');
+    if (parsing) {
+      const movieTitle = data.title;
+      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+      if (checkMovie >= 0) {
+      const removMovie = parsing.splice(checkMovie, 1)
+       storage.addItem("qu", parsing)
+      result.push(data);
+      storage.addItem("watched", result);
+      } else if (checkMovie === -1) {
+      result.push(data);
+      storage.addItem("watched", result);
+      }
+    } else {
+      result.push(data);
+      storage.addItem("watched", result);
+    }
+    addToWatched.classList.add('hide-btn')
+    removeFromWatched.classList.remove('hide-btn')
+  })
+
+  addToQueue.addEventListener('click', async () => {
+    const data = await movie.fetchById(movieId)
+    const result = storage.readItem("qu", []);
+    const parsing = storage.readItem('watched');
+    if (parsing) {
+      const movieTitle = data.title;
+      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+      if (checkMovie >= 0) {
+      const removMovie = parsing.splice(checkMovie, 1)
+       storage.addItem("watched", parsing)
+      result.push(data);
+      storage.addItem("qu", result);
+      } else if (checkMovie === -1) {
+      result.push(data);
+       storage.addItem("qu", result);
+      }
+    } else {
+      result.push(data);
+      storage.addItem("qu", result);
+    }
+    addToQueue.classList.add('hide-btn')
+    removeFromQueue.classList.remove('hide-btn')
+  })
+
+ // ФУНКЦИИ УДАЛЕНИЯ ИЗ LOCALSTORAGE
+
+  removeFromWatched.addEventListener('click', () => {
+      const parsing = storage.readItem('watched');
+  const movieTitle = data.title
+    const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+  if (checkMovie === -1) {
+    console.log("error")
+  }else {
+    const removMovie = parsing.splice(checkMovie, 1)
+    storage.addItem("watched", parsing);
+    } 
+    removeFromWatched.classList.add('hide-btn')
+    addToWatched.classList.remove('hide-btn')
+  })
+  
+  removeFromQueue.addEventListener('click', () => {
+      const parsing = storage.readItem('qu');
+  const movieTitle = data.title
+    const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+  if (checkMovie === -1) {
+    console.log("error")
+  }else {
+    const removMovie = parsing.splice(checkMovie, 1)
+    storage.addItem("qu", parsing);
+    } 
+    removeFromQueue.classList.add('hide-btn')
+    addToQueue.classList.remove('hide-btn')
+  })
+  
     // containerCard.insertAdjacentHTML('beforeend', await makeMarkup(array));
 }
 
@@ -166,8 +253,10 @@ function makeMarkupModal({poster_path, original_title, overview, popularity, gen
       <p class="about__modal-text">${overview}</p>
     </div>
     <div class="modal__button">
-      <button type="button" class="modal__btn-add modal__btn-1">add to Watched</button>
-      <button type="button" class="modal__btn-add modal__btn-2">add to queue</button>
+      <button type="button" class="modal__btn-add modal__btn-1add">add to Watched</button>
+      <button type="button" class="modal__btn-add modal__btn-1remove hide-btn">remove from Watched</button>
+      <button type="button" class="modal__btn-add modal__btn-2add">add to queue</button>
+      <button type="button" class="modal__btn-add modal__btn-2remove hide-btn">remove from queue</button>
     </div>
   </div>`
 }
