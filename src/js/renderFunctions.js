@@ -112,7 +112,40 @@ export async function openModal(movieId) {
   const removeFromWatched = document.querySelector(".modal__btn-1remove")
   const removeFromQueue = document.querySelector(".modal__btn-2remove")
   
+  // ФУНКЦИИ СОХРАНЕНИЯ КНОПОК
   
+  saveQueueBtn()
+  async function saveQueueBtn() {
+    const data = await movie.fetchById(movieId)
+    const parsing = storage.readItem('qu');
+    if (parsing) {
+      const movieTitle = data.title;
+      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+      if (checkMovie >= 0) {
+        addToQueue.classList.add('hide-btn')
+        removeFromQueue.classList.remove('hide-btn')
+      } else if(parsing === [] || undefined){
+        removeFromQueue.classList.add('hide-btn')
+        addToQueue.classList.remove('hide-btn')
+      }
+    }
+  }
+  saveWatchedBtn()
+  async function saveWatchedBtn() {
+      const data = await movie.fetchById(movieId)
+    const parsing = storage.readItem('watched');
+    if (parsing) {
+    const movieTitle = data.title;
+      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+      if (checkMovie >= 0) {
+      addToWatched.classList.add('hide-btn')
+    removeFromWatched.classList.remove('hide-btn')
+      } else if(parsing === [] || undefined)  {
+      removeFromWatched.classList.add('hide-btn')
+    addToWatched.classList.remove('hide-btn')
+      }
+    }
+  }
   // ФУНКЦИИ ДОБАВЛЕНИЯ И ПЕРЕЗАПИСИ В LOCALSTORAGE
   
   addToWatched.addEventListener('click', async () => {
@@ -137,6 +170,8 @@ export async function openModal(movieId) {
     }
     addToWatched.classList.add('hide-btn')
     removeFromWatched.classList.remove('hide-btn')
+     removeFromQueue.classList.add('hide-btn')
+    addToQueue.classList.remove('hide-btn')
   })
 
   addToQueue.addEventListener('click', async () => {
@@ -161,6 +196,9 @@ export async function openModal(movieId) {
     }
     addToQueue.classList.add('hide-btn')
     removeFromQueue.classList.remove('hide-btn')
+      removeFromWatched.classList.add('hide-btn')
+    addToWatched.classList.remove('hide-btn')
+   
   })
 
  // ФУНКЦИИ УДАЛЕНИЯ ИЗ LOCALSTORAGE
@@ -254,5 +292,3 @@ function makeMarkupModal({poster_path, original_title, overview, popularity, gen
     </div>
   </div>`
 }
-
-
