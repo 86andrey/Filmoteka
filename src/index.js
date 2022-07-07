@@ -14,7 +14,7 @@ form.addEventListener('submit', onBtnSearch);
 
 function onBtnSearch(evt){
  try {evt.preventDefault();
-searchQuery= input.value
+ const searchQuery= input.value
 if(searchQuery===''){console.log('надо ввести фильм');}
 renderMarkupByQ(searchQuery);
 }
