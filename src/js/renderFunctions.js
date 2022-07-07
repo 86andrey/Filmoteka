@@ -106,6 +106,27 @@ export async function openModal(movieId) {
     const modal=document.querySelector('.modal__card-overlay');
   modalCloseBtn.addEventListener('click', () => { modal.classList.add('is-hidden') })
   
+  const addToWatched = document.querySelector(".modal__btn-1add")
+  const addToQueue = document.querySelector(".modal__btn-2add")
+  const removeFromWatched = document.querySelector(".modal__btn-1remove")
+  const removeFromQueue = document.querySelector(".modal__btn-2remove")
+  addToWatched.addEventListener('click', () => {
+    addToWatched.classList.add('hide-btn')
+    removeFromWatched.classList.remove('hide-btn')
+  })
+  addToQueue.addEventListener('click', () => {
+    addToQueue.classList.add('hide-btn')
+    removeFromQueue.classList.remove('hide-btn')
+  })
+  removeFromWatched.addEventListener('click', () => {
+    removeFromWatched.classList.add('hide-btn')
+    addToWatched.classList.remove('hide-btn')
+  })
+  removeFromQueue.addEventListener('click', () => {
+    removeFromQueue.classList.add('hide-btn')
+    addToQueue.classList.remove('hide-btn')
+  })
+  
     // containerCard.insertAdjacentHTML('beforeend', await makeMarkup(array));
 }
 
@@ -160,8 +181,10 @@ function makeMarkupModal({poster_path, original_title, overview, popularity, gen
       <p class="about__modal-text">${overview}</p>
     </div>
     <div class="modal__button">
-      <button type="button" class="modal__btn-add modal__btn-1">add to Watched</button>
-      <button type="button" class="modal__btn-add modal__btn-2">add to queue</button>
+      <button type="button" class="modal__btn-add modal__btn-1add">add to Watched</button>
+      <button type="button" class="modal__btn-add modal__btn-1remove hide-btn">remove from Watched</button>
+      <button type="button" class="modal__btn-add modal__btn-2add">add to queue</button>
+      <button type="button" class="modal__btn-add modal__btn-2remove hide-btn">remove from queue</button>
     </div>
   </div>`
 }
