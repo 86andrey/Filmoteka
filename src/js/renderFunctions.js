@@ -3,8 +3,8 @@ import { storage } from './storage';
 const movie = new MovieApiService();
 
 const containerCard = document.querySelector('.container-card')
-
 const containerModal = document.querySelector('.modal__card-content')
+const errorMessage= document.querySelector('.header-error-container')
 
 
 export async function renderMarkupPopular() {
@@ -14,11 +14,17 @@ export async function renderMarkupPopular() {
 }
 
 export async function renderMarkupByQ(searchQuery) {
+    try{
     const array = await movie.fetchByQuery(searchQuery);
-    // console.log(array);
-    containerCard.innerHTML=await makeMarkup(array);
+    if(array.length===0){
+        showRequestError()
+      }
+    console.log(array.length);
+    containerCard.innerHTML=await makeMarkup(array);}
+    catch(error){showRequestError()}
+    }
     // containerCard.insertAdjacentHTML('beforeend', await makeMarkup(array));
-}
+
         
 function makeMarkup(array) {
   return array.map(({ poster_path, id, original_title, release_date, genre_ids } ) => {
@@ -72,7 +78,7 @@ function makeMarkup(array) {
       acc.push(movieGenre.name);
       return acc.slice(0, 3);
       }, [])
-    console.log(genreMain.length);
+    // console.log(genreMain.length);
     if (genreMain.length === 3) {
          genreMain.splice(2, 1, "Other");
     }
@@ -256,3 +262,7 @@ function makeMarkupModal({poster_path, original_title, overview, popularity, gen
 }
 
 
+function showRequestError(){
+    errorMessage.classList.remove('is-hidden')
+    setTimeout(()=>{errorMessage.classList.add('is-hidden')},2000)
+}
