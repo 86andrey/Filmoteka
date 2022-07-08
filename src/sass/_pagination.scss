@@ -1,0 +1,126 @@
+/* -------------------------------------PAGINATION--------------------------------------- */
+
+
+.tui-pagination {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 0 0;
+    @media screen and (min-width: 768px) {
+        & {
+            margin: 60px 0 0 0;
+        }
+    }
+}
+
+
+    
+
+.tui-pagination .tui-page-btn {
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.33;
+    transition: all 250ms ease-in-out;
+    &:hover {
+        background-color: #FF6B08;
+        color: #ffffff;
+    }
+}
+
+.tui-page-btn.tui-prev.custom-class-prev,
+.tui-page-btn.tui-first.tui-is-disabled,
+.tui-page-btn.tui-next.custom-class-next,
+.tui-page-btn.tui-last.tui-is-disabled,
+.tui-page-btn.tui-next-is-ellip.change-next,
+.tui-page-btn.tui-prev-is-ellip.change-prev {
+    display: none;
+}
+
+.tui-pagination .custom-class-first,
+.tui-pagination .custom-class-last {
+    background: rgba(247, 247, 247, 0.5);
+}
+
+.tui-pagination .tui-is-selected, 
+.tui-pagination strong {
+    color: #ffffff;
+    background: #FF6B08;
+    border-color: #FF6B08;
+    cursor: default;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+}
+
+.tui-pagination .tui-first-child.tui-is-selected, 
+.tui-pagination strong.tui-first-child {
+    margin-left: 0;
+}
+
+.tui-pagination .tui-first, 
+.tui-pagination .tui-last, 
+.tui-pagination .tui-prev-is-ellip, 
+.tui-pagination .tui-next-is-ellip {
+    position: relative;
+    overflow: hidden;
+    height: 40px;
+    padding: 0;
+    font-size: 0;
+    line-height: 26px;
+    white-space: nowrap;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+}
+
+
+.tui-pagination .tui-ico-prev,
+.tui-pagination .tui-ico-next,
+.tui-pagination .tui-ico-first,
+.tui-pagination .tui-ico-last,
+.tui-pagination .tui-ico-ellip {
+    background-image: none;
+}
+
+.tui-pagination .tui-prev-is-ellip:hover > .tui-ico-ellip,
+.tui-pagination .tui-next-is-ellip:hover > .tui-ico-ellip,
+.tui-pagination .custom-class-first:hover > .tui-ico-first,
+.tui-pagination .custom-class-last:hover > .tui-ico-last {
+    fill: #ffffff;
+}
+
+.tui-page-inputs {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tui-pagination .tui-ico-ellip,
+.tui-pagination .tui-ico-first,
+.tui-pagination .tui-ico-last {
+    width: 16px;
+    height: 16px;
+    fill:  #000000;
+    transition: all 250ms ease-in-out;
+}
+
+.tui-pagination .tui-ico-last,
+.tui-pagination .tui-ico-first {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+}
+.tui-pagination .tui-ico-first{
+    left: 30%;
+}

@@ -7,38 +7,56 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 export default class MovieApiService {
   constructor() {
     this.searchQuery = '';
-    this.page = 1;
   }
 
   // метод получения массива популярных фильмов. Total_pages = 1000 по дефолту.
   async fetchPopular() {
-    /////////spin///////
     const target = document.querySelector('.container-card');
     const spinner = new Spinner(opts).spin(target);
-    ////////spin///////
     try {
-      const url = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${this.page}`;
+      const url = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      // console.log(data);
+      spinner.stop();
+      return data;
+    } catch (error) {
+      console.log(error, 'fetchPopular');
+    }
+  }
+
+  async fetchPopularPagination(currentPage) {
+    try {
+      const url = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${currentPage}`;
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
-      /////>>>>>>spin//////
-      spinner.stop();
-      /////////spin<<<<<<<//
-      // return data.results;
-      return data.results;
+      return data;
     } catch (error) {
-      console.log(error);
+      console.log(error, 'fetchPopularPagination');
     }
   }
 
   // метод получения массива фильмов по запросу.
   async fetchByQuery(searchQuery) {
     try {
-      const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${this.page}&include_adult=false`;
+      const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false`;
+      const response = await fetch(url);
+      console.log(response.status);
+      const data = await response.json();
+      return await data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async fetchByQueryPagination(searchQuery, currentPage) {
+    try {
+      const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`;
       const response = await fetch(url);
       const data = await response.json();
 
-      return data.results;
+      return data;
     } catch (error) {
       console.log(error);
     }
