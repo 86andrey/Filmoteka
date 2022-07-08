@@ -102,6 +102,29 @@ function makeMarkup(array) {
         `}).join('');
 }
 
+export async function makeMarkupLib(array) {
+  return array.map(({ poster_path, id, original_title, release_date, genres }) => {
+    const newReleaseDate = release_date.split('-')[0];
+    const allgenres = genres.flatMap(genre => genre.name).slice(0, 3)
+    console.log(allgenres)
+    allgenres.slice(0, 3)
+    if (allgenres.length === 3) {
+      allgenres.splice(2, 1, "Other")
+    }
+        return `
+                  <div class="container-card_single-card" data-id="${id}" >
+                    <div class="poster">
+                        <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+                    </div>
+                    <div class="info">
+                      <h3 class="info_title">${original_title}</h3>
+                      <p class="info_details">
+                          ${allgenres.join(", ")} | ${newReleaseDate}
+                      </p>
+                    </div>
+                  </div> 
+        `}).join('');
+}
 
 export async function openModal(movieId) {
     
@@ -241,7 +264,10 @@ export async function openModal(movieId) {
 }
 
 
-function makeMarkupModal({poster_path, original_title, overview, popularity, genres_name, vote_average, vote_count}){
+function makeMarkupModal({ poster_path, original_title, overview, popularity, genres, vote_average, vote_count }) {
+  const allgenres = genres.flatMap(genre => genre.name).slice(0, 3)
+    // console.log(allgenres)
+    allgenres.slice(0, 3)
     return`
     <button type="button" class="modal__close" data-modal-close>
       <svg class="modal__close-svg">
@@ -282,7 +308,7 @@ function makeMarkupModal({poster_path, original_title, overview, popularity, gen
           <p class="discription__modal-text">${original_title}</p>
         </li>
         <li class="discription__modal-item">
-          <p class="discription__modal-text">${genres_name} </p>
+          <p class="discription__modal-text">${allgenres} </p>
         </li>
       </ul>
     </div>
