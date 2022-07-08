@@ -16,8 +16,9 @@ refs.watchBtn.addEventListener('click',async () => {
     } else {
         containerCard.innerHTML = "List is empty";
     }
-    onWatchBtnClick
+    onWatchBtnClick();
 });
+
 refs.queueBtn.addEventListener('click', async () => {
         const parsing = storage.readItem("qu")
     if (parsing) {
@@ -27,9 +28,10 @@ refs.queueBtn.addEventListener('click', async () => {
     } else {
         containerCard.innerHTML = "List is empty";
     }
-    onQueueBtnClick
+    onQueueBtnClick();
 })
-function onWatchBtnClick(event) {
+
+function onWatchBtnClick() {
     if (refs.watchBtn.classList.contains('is-header-nonactive')) {
         refs.watchBtn.classList.remove('is-header-nonactive');
         refs.watchBtn.classList.add('is-header-active');
@@ -40,7 +42,7 @@ function onWatchBtnClick(event) {
     }
 }
 
-function onQueueBtnClick(event) {
+function onQueueBtnClick() {
     if (refs.queueBtn.classList.contains('is-header-nonactive')) {
         refs.queueBtn.classList.remove('is-header-nonactive');
         refs.queueBtn.classList.add('is-header-active');
