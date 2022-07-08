@@ -82,15 +82,17 @@ function makeMarkup(array) {
 
       return `
                   <div class="container-card_single-card" data-id="${id}" >
-                    <div class="poster">
-                        <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
-                    </div>
-                    <div class="info">
-                      <h3 class="info_title">${original_title}</h3>
-                      <p class="info_details">
-                          ${genreMain.join(', ')} | ${newReleaseDate}
-                      </p>
-                    </div>
+                    <a href="" src="">
+                      <div class="poster">
+                          <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+                      </div>
+                      <div class="info">
+                        <h3 class="info_title">${original_title}</h3>
+                        <p class="info_details">
+                            ${genreMain.join(', ')} | ${newReleaseDate}
+                        </p>
+                      </div>
+                    </a>
                   </div> 
         `;
     })
