@@ -1,3 +1,6 @@
+import { Spinner } from 'spin.js';
+import opts from './spinner';
+
 const API_KEY = '03779c52c93ea63ebe46db37a334d7d8';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
@@ -8,11 +11,14 @@ export default class MovieApiService {
 
   // метод получения массива популярных фильмов. Total_pages = 1000 по дефолту.
   async fetchPopular() {
+    const target = document.querySelector('.container-card');
+    const spinner = new Spinner(opts).spin(target);
     try {
       const url = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
       const response = await fetch(url);
       const data = await response.json();
       // console.log(data);
+      spinner.stop();
       return data;
     } catch (error) {
       console.log(error, 'fetchPopular');

@@ -1,3 +1,4 @@
+import './js/btm-to-top';
 import MovieApiService from './js/movieFetch.js';
 import { createFilmsByPopular, createFilmsBySearch } from './js/createFilms.js';
 import { openModal } from './js/renderFunctions.js';
@@ -41,13 +42,11 @@ const containerCard = document.querySelector('.container-card');
 
 containerCard.addEventListener('click', event => {
   const movieClick = event.path[2];
-  console.log(movieClick);
   if (!movieClick.classList.contains('container-card_single-card')) {
     return;
   }
   modal.classList.remove('is-hidden');
   const movieId = movieClick.dataset.id;
-  console.log(movieId);
   openModal(movieId);
 });
 
