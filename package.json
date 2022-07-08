@@ -18,7 +18,9 @@
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
+    "lodash.throttle": "^4.1.1",
     "modern-normalize": "^1.1.0",
+    "spin.js": "^4.1.1",
     "tui-pagination": "^3.4.1"
   },
   "devDependencies": {
