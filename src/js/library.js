@@ -1,10 +1,24 @@
 import { storage } from './storage';
 import { makeMarkupLib } from './renderFunctions';
-const containerCard = document.querySelector('.container-card')
+import { openModal } from './renderFunctions';
+import { renderWatched } from './renderLib';
 const refs = {
     watchBtn: document.querySelector('#header-watched-button'),
     queueBtn: document.querySelector('#header-queue-button'),
-  };
+};
+  const modal=document.querySelector('.modal__card-overlay');
+const containerCard = document.querySelector('.container-card')
+
+containerCard.addEventListener('click', (event)=>{
+    const movieClick =event.path[2]
+    if(!movieClick.classList.contains('container-card_single-card')){
+        return}
+    modal.classList.remove('is-hidden')
+    const movieId =movieClick.dataset.id;
+    openModal(movieId);
+});
+    
+renderWatched()
 
 refs.watchBtn.addEventListener('click',async () => {
     const parsing = storage.readItem("watched")
