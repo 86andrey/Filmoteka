@@ -1,5 +1,10 @@
+import './js/btm-to-top';
 import MovieApiService from './js/movieFetch.js';
-import { renderMarkupPopular, renderMarkupByQ,  openModal } from './js/renderFunctions.js';
+import {
+  renderMarkupPopular,
+  renderMarkupByQ,
+  openModal,
+} from './js/renderFunctions.js';
 
 //скрипт меняет стили кнопок в хедере
 //import './js/header_styles.js';
@@ -12,35 +17,37 @@ const input = document.querySelector('#search-box');
 //функция поиска по запросу
 form.addEventListener('submit', onBtnSearch);
 
-function onBtnSearch(evt){
- try {evt.preventDefault();
- const searchQuery= input.value
-if(searchQuery===''){console.log('надо ввести фильм');}
-renderMarkupByQ(searchQuery);
+function onBtnSearch(evt) {
+  try {
+    evt.preventDefault();
+    const searchQuery = input.value;
+    if (searchQuery === '') {
+      console.log('надо ввести фильм');
+    }
+    renderMarkupByQ(searchQuery);
+  } catch {
+    error => console.log(error);
+  }
 }
-catch{error=>console.log(error)};
-}
-
 
 // Sergey--------------------------------------
-renderMarkupPopular()
-
+renderMarkupPopular();
 
 // Sergey--------------------------------------
-
 
 //набросок модалки
-const modal=document.querySelector('.modal__card-overlay');
-const containerCard = document.querySelector('.container-card')
+const modal = document.querySelector('.modal__card-overlay');
+const containerCard = document.querySelector('.container-card');
 
-containerCard.addEventListener('click', (event)=>{
-    const movieClick =event.path[2]
-    if(!movieClick.classList.contains('container-card_single-card')){
-        return}
-    modal.classList.remove('is-hidden')
-    const movieId =movieClick.dataset.id;
-    openModal(movieId);
-    });
+containerCard.addEventListener('click', event => {
+  const movieClick = event.path[2];
+  if (!movieClick.classList.contains('container-card_single-card')) {
+    return;
+  }
+  modal.classList.remove('is-hidden');
+  const movieId = movieClick.dataset.id;
+  openModal(movieId);
+});
 
 //оптимизация роботи модалки
 // (() => {
@@ -55,7 +62,7 @@ containerCard.addEventListener('click', (event)=>{
 //     refs.closeModalBtn.addEventListener('click', closeModal);
 //     refs.modal.addEventListener('click', closeByOverlay)
 //     refs.containerCard.addEventListener('click', openModal)
-    
+
 //         document.addEventListener('keydown', function(e) {
 //             if (e.key === 'Escape') {
 //                 closeModal()
@@ -74,7 +81,6 @@ containerCard.addEventListener('click', (event)=>{
 //         refs.modal.classList.add('is-hidden')
 //     }
 // })();
-
 
 //  function modalShow(event) {
 //     //   if (event.target.className !== "DIV") {
