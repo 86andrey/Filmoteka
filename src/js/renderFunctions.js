@@ -8,6 +8,7 @@ const errorMessage = document.querySelector('.header-error-container');
 
 // Функция для отображения карточек
 export async function renderMarkup(movies) {
+  console.log(movies);
   containerCard.innerHTML = await makeMarkup(movies.results);
 }
 
