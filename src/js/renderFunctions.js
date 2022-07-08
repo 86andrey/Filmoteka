@@ -83,7 +83,7 @@ function makeMarkup(array) {
 
       return `
                   <div class="container-card_single-card" data-id="${id}" >
-                    <a href="" src="">
+                    
                       <div class="poster">
                           <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
                       </div>
@@ -93,7 +93,7 @@ function makeMarkup(array) {
                             ${genreMain.join(', ')} | ${newReleaseDate}
                         </p>
                       </div>
-                    </a>
+                    
                   </div> 
         `;
     })
