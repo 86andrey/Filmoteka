@@ -9,7 +9,7 @@ const errorMessage = document.querySelector('.header-error-container');
 
 // Функция для отображения карточек
 export async function renderMarkup(movies) {
-  console.log(movies);
+  // console.log(movies);
   containerCard.innerHTML = await makeMarkup(movies.results);
 }
 
@@ -28,25 +28,6 @@ function makeMarkup(array) {
   return array
     .map(({ poster_path, id, original_title, release_date, genre_ids }) => {
       const newReleaseDate = release_date.split('-')[0];
-      // const genres = movie.getGenres().then(data => data);
-
-      // function genresChanged(){
-      //   if (genre_ids.length === 0) {
-      //     return (genre_ids = 'Other');
-      //   }
-      //   genre_ids = newGenre_ids
-      //     .map(genreID => (genreID = genres[genreID]))
-      //     .slice(0, 2)
-      //     .join(', ');
-
-      //   return;
-      // }
-      // console.log(array.results)
-      // const genreMain = array.results.flatMap(item => {
-      //     if(item.){}
-      //     console.log(item)
-      //   })
-      // console.log(genreMain)
       const ganresArray = [
         { id: 28, name: 'Action' },
         { id: 12, name: 'Adventure' },
@@ -68,7 +49,7 @@ function makeMarkup(array) {
         { id: 10752, name: 'War' },
         { id: 37, name: 'Western' },
       ];
-
+      console.log(typeof poster_path);
       const genreMain = genre_ids.reduce((acc, id) => {
         const movieGenre = ganresArray.filter(genre => genre.id === id)[0];
         acc.push(movieGenre.name);
@@ -77,16 +58,13 @@ function makeMarkup(array) {
       // console.log(genreMain.length);
       if (genreMain.length === 3) {
         genreMain.splice(2, 1, 'Other');
-      }
-      // if (genreMain.length === 0) {
-      //    genreMain = "No janre";
-      // }
-
-      return `
+      }    
+      if (poster_path === null) {
+        return `
                   <div class="container-card_single-card" data-id="${id}" >
                     
                       <div class="poster">
-                          <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+                          <img class="poster_img" src="https://img.freepik.com/premium-photo/concept-cinema-accessories-against-dark-wooden-background_185193-61023.jpg?w=740" alt="${original_title}">
                       </div>
                       <div class="info">
                         <h3 class="info_title">${original_title}</h3>
@@ -97,6 +75,23 @@ function makeMarkup(array) {
                     
                   </div> 
         `;
+
+         }
+      return `
+                  <div class="container-card_single-card" data-id="${id}" >
+                    
+                      <div class="poster">
+                          <img class="poster_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+                      </div>
+                      <div class="info">
+                        <h3 class="info_title">${original_title}</h3>
+                        <p class="info_details">
+                            ${genreMain.join(', ')} | ${newReleaseDate}
+                        </p>
+                      </div>
+                    
+                  </div> 
+        `;     
     })
     .join('');
 }
@@ -128,47 +123,46 @@ export async function makeMarkupLib(array) {
 }
 
 export async function openModal(movieId) {
-    
-    const data = await movie.fetchById(movieId);
-    // console.log(array);
-    containerModal.innerHTML=await makeMarkupModal(data);
-    
-    const modalCloseBtn=document.querySelector('.modal__close');
-    const modal=document.querySelector('.modal__card-overlay');
+  const data = await movie.fetchById(movieId);
+  // console.log(array);
+  containerModal.innerHTML = await makeMarkupModal(data);
 
-      //МОДАЛКА ЗАКРЫТА КРЕСТИКОМ
-      modalCloseBtn.addEventListener('click', closeByCross);
-      function closeByCross() {
-          modalCloseBtn.removeEventListener('click', closeByCross);
-          modal.classList.add('is-hidden')
-          // console.log("модалка закрита(крестиком)");
-      }
-  
-      //МОДАЛКА ЗАКРЫТА ФОНОМ
-      modal.addEventListener('click', closeByOverlay);
-      function closeByOverlay(e) {
-        if (e.target === modal) {
-          modal.removeEventListener('click', closeByOverlay);
-          modal.classList.add('is-hidden')
-          // console.log("модалка закрита(фоном)");
-        }
-      }
+  const modalCloseBtn = document.querySelector('.modal__close');
+  const modal = document.querySelector('.modal__card-overlay');
 
-      //МОДАЛКА ЗАКРЫТА esc
-      window.addEventListener('keydown', closeByEsc);
-      function closeByEsc(e) {
-        if (e.keyCode === 27) {
-            window.removeEventListener('keydown', closeByEsc);
-            modal.classList.add('is-hidden')
-            // console.log("модалка закрита(Esc)");
-        }
-      }
-  
-  const addToWatched = document.querySelector(".modal__btn-1add")
-  const addToQueue = document.querySelector(".modal__btn-2add")
-  const removeFromWatched = document.querySelector(".modal__btn-1remove")
-  const removeFromQueue = document.querySelector(".modal__btn-2remove")
-  
+  //МОДАЛКА ЗАКРЫТА КРЕСТИКОМ
+  modalCloseBtn.addEventListener('click', closeByCross);
+  function closeByCross() {
+    modalCloseBtn.removeEventListener('click', closeByCross);
+    modal.classList.add('is-hidden');
+    // console.log("модалка закрита(крестиком)");
+  }
+
+  //МОДАЛКА ЗАКРЫТА ФОНОМ
+  modal.addEventListener('click', closeByOverlay);
+  function closeByOverlay(e) {
+    if (e.target === modal) {
+      modal.removeEventListener('click', closeByOverlay);
+      modal.classList.add('is-hidden');
+      // console.log("модалка закрита(фоном)");
+    }
+  }
+
+  //МОДАЛКА ЗАКРЫТА esc
+  window.addEventListener('keydown', closeByEsc);
+  function closeByEsc(e) {
+    if (e.keyCode === 27) {
+      window.removeEventListener('keydown', closeByEsc);
+      modal.classList.add('is-hidden');
+      // console.log("модалка закрита(Esc)");
+    }
+  }
+
+  const addToWatched = document.querySelector('.modal__btn-1add');
+  const addToQueue = document.querySelector('.modal__btn-2add');
+  const removeFromWatched = document.querySelector('.modal__btn-1remove');
+  const removeFromQueue = document.querySelector('.modal__btn-2remove');
+
   // ФУНКЦИИ СОХРАНЕНИЯ КНОПОК
 
   saveQueueBtn();
@@ -208,89 +202,91 @@ export async function openModal(movieId) {
     }
   }
   // ФУНКЦИИ ДОБАВЛЕНИЯ И ПЕРЕЗАПИСИ В LOCALSTORAGE
-  
+
   addToWatched.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId)
-    const result = storage.readItem("watched", []);
+    const data = await movie.fetchById(movieId);
+    const result = storage.readItem('watched', []);
     const parsing = storage.readItem('qu');
     if (parsing) {
       const movieTitle = data.title;
-      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+      const checkMovie = parsing.findIndex(
+        option => option.title === movieTitle
+      );
       if (checkMovie >= 0) {
-      const removMovie = parsing.splice(checkMovie, 1)
-        storage.addItem("qu", parsing)
-      result.push(data);
-      storage.addItem("watched", result);
+        const removMovie = parsing.splice(checkMovie, 1);
+        storage.addItem('qu', parsing);
+        result.push(data);
+        storage.addItem('watched', result);
       } else if (checkMovie === -1) {
-      result.push(data);
-      storage.addItem("watched", result);
+        result.push(data);
+        storage.addItem('watched', result);
       }
     } else {
       result.push(data);
-      storage.addItem("watched", result);
+      storage.addItem('watched', result);
     }
-    addToWatched.classList.add('hide-btn')
-    removeFromWatched.classList.remove('hide-btn')
-     removeFromQueue.classList.add('hide-btn')
-    addToQueue.classList.remove('hide-btn')
-  })
+    addToWatched.classList.add('hide-btn');
+    removeFromWatched.classList.remove('hide-btn');
+    removeFromQueue.classList.add('hide-btn');
+    addToQueue.classList.remove('hide-btn');
+  });
 
   addToQueue.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId)
-    const result = storage.readItem("qu", []);
+    const data = await movie.fetchById(movieId);
+    const result = storage.readItem('qu', []);
     const parsing = storage.readItem('watched');
     if (parsing) {
       const movieTitle = data.title;
-      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+      const checkMovie = parsing.findIndex(
+        option => option.title === movieTitle
+      );
       if (checkMovie >= 0) {
-      const removMovie = parsing.splice(checkMovie, 1)
-        storage.addItem("watched", parsing)
-      result.push(data);
-        storage.addItem("qu", result);
+        const removMovie = parsing.splice(checkMovie, 1);
+        storage.addItem('watched', parsing);
+        result.push(data);
+        storage.addItem('qu', result);
       } else if (checkMovie === -1) {
-      result.push(data);
-       storage.addItem("qu", result);
+        result.push(data);
+        storage.addItem('qu', result);
       }
     } else {
       result.push(data);
-      storage.addItem("qu", result);
+      storage.addItem('qu', result);
     }
-    addToQueue.classList.add('hide-btn')
-    removeFromQueue.classList.remove('hide-btn')
-      removeFromWatched.classList.add('hide-btn')
-    addToWatched.classList.remove('hide-btn')
-   
-  })
+    addToQueue.classList.add('hide-btn');
+    removeFromQueue.classList.remove('hide-btn');
+    removeFromWatched.classList.add('hide-btn');
+    addToWatched.classList.remove('hide-btn');
+  });
 
- // ФУНКЦИИ УДАЛЕНИЯ ИЗ LOCALSTORAGE
+  // ФУНКЦИИ УДАЛЕНИЯ ИЗ LOCALSTORAGE
   removeFromWatched.addEventListener('click', async () => {
-      const parsing = storage.readItem('watched');
-  const movieTitle = data.title
-    const checkMovie = parsing.findIndex(option => option.title === movieTitle)
-  if (checkMovie === -1) {
-    console.log("error")
-  } else {
-    const removMovie = parsing.splice(checkMovie, 1)
-    storage.addItem("watched", parsing);
-    } 
-    removeFromWatched.classList.add('hide-btn')
-    addToWatched.classList.remove('hide-btn')
-  })
-  
-  removeFromQueue.addEventListener('click', () => {
-      const parsing = storage.readItem('qu');
-  const movieTitle = data.title
-    const checkMovie = parsing.findIndex(option => option.title === movieTitle)
-  if (checkMovie === -1) {
-    console.log("error")
-  }else {
-    const removMovie = parsing.splice(checkMovie, 1)
-    storage.addItem("qu", parsing);
-    } 
-    removeFromQueue.classList.add('hide-btn')
-    addToQueue.classList.remove('hide-btn')
-  })
+    const parsing = storage.readItem('watched');
+    const movieTitle = data.title;
+    const checkMovie = parsing.findIndex(option => option.title === movieTitle);
+    if (checkMovie === -1) {
+      console.log('error');
+    } else {
+      const removMovie = parsing.splice(checkMovie, 1);
+      storage.addItem('watched', parsing);
+    }
+    removeFromWatched.classList.add('hide-btn');
+    addToWatched.classList.remove('hide-btn');
+  });
 
+  removeFromQueue.addEventListener('click', () => {
+    const parsing = storage.readItem('qu');
+    const movieTitle = data.title;
+    const checkMovie = parsing.findIndex(option => option.title === movieTitle);
+    if (checkMovie === -1) {
+      console.log('error');
+    } else {
+      const removMovie = parsing.splice(checkMovie, 1);
+      storage.addItem('qu', parsing);
+    }
+    removeFromQueue.classList.add('hide-btn');
+    addToQueue.classList.remove('hide-btn');
+  });
 }
 
 function makeMarkupModal({
@@ -334,7 +330,7 @@ function makeMarkupModal({
         </li>
         <li class="discription__modal-item">
           <h4 class="discription__modal-title">Genre</h4>
-          <p class="discription__modal-text">${allgenres.join(", ")}</p>
+          <p class="discription__modal-text">${allgenres.join(', ')}</p>
         </li>
       </ul>
     </div>

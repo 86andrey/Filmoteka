@@ -2,13 +2,21 @@ import MovieApiService from './movieFetch';
 import { renderMarkup } from './renderFunctions';
 import { input } from '../index';
 import Pagination from 'tui-pagination';
-import { HOME_SEARCH_TYPE, QUERY_SEARCH_TYPE } from './searchTypes';
+import {
+  HOME_SEARCH_TYPE,
+  QUERY_SEARCH_TYPE,
+  WATCHED_SEARCH_TYPE,
+  QUEUE_SEARCH_TYPE,
+} from './searchTypes';
+import { storage } from './storage';
+import { makeMarkupLib } from './renderFunctions';
 import sprite from '../images/icons.svg';
 
 const movie = new MovieApiService();
 const arrowIcon = `${sprite}#icon-arrow`;
 const dotsIcon = `${sprite}#icon-dots`;
 
+// старое место для пагинации
 export const paginationSettings = {
   startPage: 1,
   searchType: null,
@@ -16,6 +24,7 @@ export const paginationSettings = {
   totalItemsHome: null,
 };
 
+// создаем пагинацию
 export function createPagination({ page, total_results }) {
   const paginationEl = document.querySelector('#tui-pagination-container');
   //   console.log(results);
@@ -46,32 +55,70 @@ export function createPagination({ page, total_results }) {
   };
   const pagination = new Pagination(paginationEl, options);
   // paginationSettings.pagination = pagination;
-  // console.dir(pagination);
 
+  // рендерим пагинацию
   pagination.on('afterMove', async event => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
     const currentPage = event.page;
-    const searchQuery = input.value;
-    console.log(searchQuery);
-
+    // const searchQuery = input.value;
+    const parsing = storage.readItem('watched');
+    const parsingByQ = storage.readItem('qu');
+    const containerCard = document.querySelector('.container-card');
+    // console.log(searchQuery);
+    // addPageToArray(currentPage, parsing);
     if (paginationSettings.searchType === HOME_SEARCH_TYPE) {
       const moviesPopular = await movie.fetchPopularPagination(currentPage);
       const data = await moviesPopular;
       console.log(data);
       renderMarkup(data);
+
       // console.log(form);
     } else if (paginationSettings.searchType === QUERY_SEARCH_TYPE) {
-      searchQuery;
       const moviesByQ = await movie.fetchByQueryPagination(
         input.value,
         currentPage
       );
       const data = await moviesByQ;
+      console.log(data);
       renderMarkup(data);
+    }
+
+    // Library
+    else if (paginationSettings.searchType === WATCHED_SEARCH_TYPE) {
+      const moviesWatched = addPageToArray(currentPage, parsing);
+      console.log(moviesWatched, 'moviesWatched');
+      containerCard.innerHTML = await makeMarkupLib(moviesWatched.results);
+    } else if (paginationSettings.searchType === QUEUE_SEARCH_TYPE) {
+      const moviesQueue = addPageToArray(currentPage, parsingByQ);
+      console.log(moviesQueue, 'moviesQueue');
+      containerCard.innerHTML = '';
+      containerCard.innerHTML = await makeMarkupLib(moviesQueue.results);
     }
   });
   return pagination;
+}
+
+export function addPageToArray(currentPage, parsing) {
+  let notesOnPage = 20;
+  let page = currentPage;
+
+  total_results = parsing.length;
+  console.log(parsing.length);
+
+  let startPage = (page - 1) * notesOnPage;
+  let endPage = startPage + notesOnPage;
+
+  let results = parsing.slice(startPage, endPage);
+  // notes.push(page);
+  console.log(results);
+  const object = {
+    page,
+    results,
+    total_results,
+  };
+  console.log(object);
+  return object;
 }
