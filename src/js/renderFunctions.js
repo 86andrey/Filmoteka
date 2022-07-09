@@ -28,25 +28,6 @@ function makeMarkup(array) {
   return array
     .map(({ poster_path, id, original_title, release_date, genre_ids }) => {
       const newReleaseDate = release_date.split('-')[0];
-      // const genres = movie.getGenres().then(data => data);
-
-      // function genresChanged(){
-      //   if (genre_ids.length === 0) {
-      //     return (genre_ids = 'Other');
-      //   }
-      //   genre_ids = newGenre_ids
-      //     .map(genreID => (genreID = genres[genreID]))
-      //     .slice(0, 2)
-      //     .join(', ');
-
-      //   return;
-      // }
-      // console.log(array.results)
-      // const genreMain = array.results.flatMap(item => {
-      //     if(item.){}
-      //     console.log(item)
-      //   })
-      // console.log(genreMain)
       const ganresArray = [
         { id: 28, name: 'Action' },
         { id: 12, name: 'Adventure' },
@@ -68,7 +49,7 @@ function makeMarkup(array) {
         { id: 10752, name: 'War' },
         { id: 37, name: 'Western' },
       ];
-
+      console.log(typeof poster_path);
       const genreMain = genre_ids.reduce((acc, id) => {
         const movieGenre = ganresArray.filter(genre => genre.id === id)[0];
         acc.push(movieGenre.name);
@@ -77,16 +58,13 @@ function makeMarkup(array) {
       // console.log(genreMain.length);
       if (genreMain.length === 3) {
         genreMain.splice(2, 1, 'Other');
-      }
-      // if (genreMain.length === 0) {
-      //    genreMain = "No janre";
-      // }
-
-      return `
+      }    
+      if (poster_path === null) {
+        return `
                   <div class="container-card_single-card" data-id="${id}" >
                     
                       <div class="poster">
-                          <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+                          <img class="poster_img" src="https://img.freepik.com/premium-photo/concept-cinema-accessories-against-dark-wooden-background_185193-61023.jpg?w=740" alt="${original_title}">
                       </div>
                       <div class="info">
                         <h3 class="info_title">${original_title}</h3>
@@ -97,6 +75,23 @@ function makeMarkup(array) {
                     
                   </div> 
         `;
+
+         }
+      return `
+                  <div class="container-card_single-card" data-id="${id}" >
+                    
+                      <div class="poster">
+                          <img class="poster_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+                      </div>
+                      <div class="info">
+                        <h3 class="info_title">${original_title}</h3>
+                        <p class="info_details">
+                            ${genreMain.join(', ')} | ${newReleaseDate}
+                        </p>
+                      </div>
+                    
+                  </div> 
+        `;     
     })
     .join('');
 }

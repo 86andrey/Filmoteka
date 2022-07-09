@@ -16,6 +16,7 @@ const refs = {
 };
 const modal = document.querySelector('.modal__card-overlay');
 const containerCard = document.querySelector('.container-card');
+const containerPlaceholder = document.querySelector('.container-placeholder');
 
 containerCard.addEventListener('click', event => {
   const movieClick = event.path[2];
@@ -31,14 +32,22 @@ renderWatched();
 async function renderWatched() {
   const parsing = storage.readItem('watched');
   const parsingPage = addPageToArray(1, parsing);
-  console.log(parsingPage);
+  console.log(parsingPage.results.length);
+  if (parsingPage.results.length === 0) {
+    console.log('Нет данных');
+    containerPlaceholder.classList.remove('visually-hidden');
+  }
   if (parsingPage.total_results > 20) {
     console.log(createPagination(parsingPage));
 
     paginationSettings.searchType = WATCHED_SEARCH_TYPE;
   }
+
   if (parsingPage.results.length < 21) {
     containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+  }
+  if (parsingPage.results.length !== 0) {
+    containerPlaceholder.classList.add('visually-hidden');
   }
 }
 
@@ -46,14 +55,22 @@ refs.watchBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('watched');
   const parsingPage = addPageToArray(1, parsing);
   console.log(parsingPage.results);
+  if (parsing.length === 0) {
+    console.log('Нет данных watchbtn');
+    containerCard.innerHTML = '';
+    containerPlaceholder.classList.remove('visually-hidden');
+  }
   if (parsingPage.total_results > 20) {
     console.log(createPagination(parsingPage));
 
     paginationSettings.searchType = WATCHED_SEARCH_TYPE;
   }
   if (parsingPage.results.length < 21) {
-    containerCard.innerHTML = '';
+    // containerCard.innerHTML = '';
     containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+  }
+  if (parsingPage.results.length !== 0) {
+    containerPlaceholder.classList.add('visually-hidden');
   }
   onWatchBtnClick();
 });
@@ -66,6 +83,12 @@ refs.queueBtn.addEventListener('click', async () => {
   console.log(parsingPage);
   paginationEl.innerHTML = '';
   containerCard.innerHTML = '';
+
+  if (parsing.length === 0) {
+    console.log('Нет данных queqeeq');
+    containerCard.innerHTML = '';
+    containerPlaceholder.classList.remove('visually-hidden');
+  }
   if (parsingPage.total_results > 20) {
     console.log('Пагинация By Queue');
     console.log(createPagination(parsingPage));
@@ -74,8 +97,11 @@ refs.queueBtn.addEventListener('click', async () => {
   }
 
   if (parsingPage.results.length < 21) {
-    containerCard.innerHTML = '';
+    // containerCard.innerHTML = '';
     containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+  }
+  if (parsingPage.results.length !== 0) {
+    containerPlaceholder.classList.add('visually-hidden');
   }
   onQueueBtnClick();
 });

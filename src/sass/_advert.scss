@@ -1,0 +1,73 @@
+.advert{
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    // border-radius: 50%;
+    // overflow: hidden;
+    // background-color: hsl(160, 100%, 75%, 0.9);
+    z-index: 5;
+    top: 50vh;
+    left: 0%;
+    transform: translateX(-100%) translateY(-50%) ;
+    
+    @media screen and (max-width: 1279px) {
+     display: none;
+    }
+}
+
+.advert {
+    animation-name: moveAdvert;
+    animation-duration: 5000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    
+  }
+
+  .advert__image{
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .advert__button-close {
+    position: absolute;
+    z-index: 10;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(248, 195, 105, 0.9);
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    border-color: rgba(0, 0, 0, 0.1);
+    // background-color: inherit;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-left: auto;
+    opacity: 1;
+    stroke: black;
+     }
+
+     .advert__icon-close {
+      position: relative;
+      z-index: 15;
+    stroke: black;
+      }
+  
+  @keyframes moveAdvert {
+    0% {
+      transform: translateX(-100%) translateY(-50%);
+    }
+    20% {
+        transform: translateX(0%) translateY(-50%);
+      }
+    80% {
+        transform: translateX(0%) translateY(-50%);
+      }
+    100% {
+      transform: translateX(-100%) translateY(-50%);
+    }
+  }
