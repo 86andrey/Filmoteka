@@ -9,8 +9,7 @@
     top: 50vh;
     left: 0%;
     transform: translateX(-100%) translateY(-50%) ;
-    left: 0;
-
+    
     @media screen and (max-width: 1279px) {
      display: none;
     }
@@ -52,7 +51,9 @@
     stroke: black;
      }
 
-     .modal__icon-close {
+     .advert__icon-close {
+      position: relative;
+      z-index: 15;
     stroke: black;
       }
   
