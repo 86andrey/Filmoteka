@@ -11,6 +11,11 @@ import { openModal } from './js/renderFunctions.js';
 export const form = document.querySelector('.header-input-container');
 export const input = document.querySelector('#search-box');
 
+//всплывающий репета
+const advertCloseBtn = document.querySelector('.advert__button-close')
+const advertContainet = document.querySelector('.advert')
+advertCloseBtn.addEventListener('click', ()=>{advertContainet.classList.add('is-hidden')})
+
 //функция поиска по запросу
 form.addEventListener('submit', onBtnSearch);
 
