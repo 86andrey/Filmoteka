@@ -22,17 +22,18 @@ containerCard.addEventListener('click', (event)=>{
 renderWatched()
 async function renderWatched() {
     const parsing = storage.readItem("watched")
-    if (parsing.length===0) {containerPlaceholder.classList.remove('is-hidden');
-    } else{ containerPlaceholder.classList.add('is-hidden');
+    // console.log(parsing);
+    if (parsing.length===0) {containerPlaceholder.classList.remove('visually-hidden');
+    } else{ containerPlaceholder.classList.add('visually-hidden');
         containerCard.innerHTML = await makeMarkupLib(parsing);
     }
 }
 refs.watchBtn.addEventListener('click',async () => {
     const parsing = storage.readItem("watched")
-    console.log(parsing)
+    // console.log(parsing)
     if (parsing.length===0) { containerCard.innerHTML='';
-        containerPlaceholder.classList.remove('is-hidden');
-} else{ containerPlaceholder.classList.add('is-hidden');
+        containerPlaceholder.classList.remove('visually-hidden');
+} else{ containerPlaceholder.classList.add('visually-hidden');
     containerCard.innerHTML = await makeMarkupLib(parsing);
 }
     onWatchBtnClick();
@@ -41,8 +42,8 @@ refs.watchBtn.addEventListener('click',async () => {
 refs.queueBtn.addEventListener('click', async () => {
         const parsing = storage.readItem("qu")
         if (parsing.length===0) { containerCard.innerHTML='';
-            containerPlaceholder.classList.remove('is-hidden');
-    } else{ containerPlaceholder.classList.add('is-hidden');
+            containerPlaceholder.classList.remove('visually-hidden');
+    } else{ containerPlaceholder.classList.add('visually-hidden');
         containerCard.innerHTML = await makeMarkupLib(parsing);
     }
     onQueueBtnClick();

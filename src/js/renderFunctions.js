@@ -108,7 +108,7 @@ export async function makeMarkupLib(array) {
       return `
                   <div class="container-card_single-card" data-id="${id}" >
                     <div class="poster">
-                        <img src="https://image.tmdb.org/t/p${poster_path}" alt="${original_title}">
+                        <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
                     </div>
                     <div class="info">
                       <h3 class="info_title">${original_title}</h3>
