@@ -9,6 +9,7 @@ const movie = new MovieApiService();
 const arrowIcon = `${sprite}#icon-arrow`;
 const dotsIcon = `${sprite}#icon-dots`;
 
+// старое место для пагинации
 export const paginationSettings = {
   startPage: 1,
   searchType: null,
@@ -16,6 +17,7 @@ export const paginationSettings = {
   totalItemsHome: null,
 };
 
+// создаем пагинацию
 export function createPagination({ page, total_results }) {
   const paginationEl = document.querySelector('#tui-pagination-container');
   //   console.log(results);
@@ -46,8 +48,8 @@ export function createPagination({ page, total_results }) {
   };
   const pagination = new Pagination(paginationEl, options);
   // paginationSettings.pagination = pagination;
-  // console.dir(pagination);
 
+  // рендерим пагинацию
   pagination.on('afterMove', async event => {
     const currentPage = event.page;
     const searchQuery = input.value;
