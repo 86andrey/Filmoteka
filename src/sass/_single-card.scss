@@ -26,6 +26,16 @@
 }
 
 .container-card_single-card {
+    //>>>>>>>збільшення масштабу img>>>>
+            width: 100%;
+            height: 100%;
+            transition: transform 500ms;
+    
+            &:hover {
+                transform: scale(1.05);
+                border-radius: 1px;
+            }
+        //<<<<<<<збільшення масштабу img<<<<<
     @media screen and (min-width: 768px) {
             flex-basis: calc(100% / 2 - 32px);
             margin-top: 59px;
@@ -41,6 +51,20 @@
         }
 
 }
+
+// //>>>>>>>збільшення масштабу img>>>>
+// .container-card_single-card {
+//     width: 100%;
+//     height: 100%;
+//     transition: transform 500ms;
+
+//     &:hover {
+//         transform: scale(1.05);
+//         border-radius: 1px;
+//     }
+// }
+// //<<<<<<<збільшення масштабу img<<<<<
+
 .poster {
     margin-bottom: 10px;
     @media screen and (min-width: 768px) {
@@ -68,6 +92,9 @@
 
 .info_title{
     color: $text-color;
+    &:hover {
+        color: $cards-text;
+    }
 }
 
 .info_details {
