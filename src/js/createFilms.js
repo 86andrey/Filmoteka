@@ -5,11 +5,12 @@ import { HOME_SEARCH_TYPE, QUERY_SEARCH_TYPE } from './searchTypes';
 
 const movie = new MovieApiService();
 
+// рендерит карточки популярных фильмов
 export async function createFilmsByPopular() {
   try {
     const movies = await movie.fetchPopular();
-    // console.log(movies);
-    if (movies.results.length > 19) {
+    console.log(movies);
+    if (movies.total_results > 20) {
       createPagination(movies);
 
       paginationSettings.searchType = HOME_SEARCH_TYPE;
@@ -19,7 +20,7 @@ export async function createFilmsByPopular() {
     console.dir(err);
   }
 }
-
+// рендерит карточки фильмов по запросу
 export async function createFilmsBySearch(searchQuery) {
   const paginationEl = document.querySelector('#tui-pagination-container');
   const containerCard = document.querySelector('.container-card');
@@ -33,7 +34,7 @@ export async function createFilmsBySearch(searchQuery) {
       showRequestError();
     }
     // console.log(movies);
-    if (movies.results.length > 19) {
+    if (movies.total_results > 20) {
       createPagination(movies);
       paginationSettings.searchType = QUERY_SEARCH_TYPE;
     }
