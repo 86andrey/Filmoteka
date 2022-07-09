@@ -1,7 +1,5 @@
 import MovieApiService from './movieFetch';
 import { storage } from './storage';
-import { renderWatched } from './renderLib';
-import { renderQueue } from './renderLib';
 
 const movie = new MovieApiService();
 
@@ -109,7 +107,6 @@ export async function makeMarkupLib(array) {
       const newReleaseDate = release_date.split('-')[0];
       const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
       console.log(allgenres);
-      allgenres.slice(0, 3);
       if (allgenres.length === 3) {
         allgenres.splice(2, 1, 'Other');
       }
@@ -196,7 +193,6 @@ export async function openModal(movieId) {
       if (checkMovie >= 0) {
       const removMovie = parsing.splice(checkMovie, 1)
         storage.addItem("qu", parsing)
-        renderQueue ()
       result.push(data);
       storage.addItem("watched", result);
       } else if (checkMovie === -1) {
@@ -223,7 +219,6 @@ export async function openModal(movieId) {
       if (checkMovie >= 0) {
       const removMovie = parsing.splice(checkMovie, 1)
         storage.addItem("watched", parsing)
-        renderWatched()
       result.push(data);
         storage.addItem("qu", result);
       } else if (checkMovie === -1) {
@@ -251,7 +246,6 @@ export async function openModal(movieId) {
   } else {
     const removMovie = parsing.splice(checkMovie, 1)
     storage.addItem("watched", parsing);
-    renderWatched()
     } 
     removeFromWatched.classList.add('hide-btn')
     addToWatched.classList.remove('hide-btn')
@@ -266,13 +260,11 @@ export async function openModal(movieId) {
   }else {
     const removMovie = parsing.splice(checkMovie, 1)
     storage.addItem("qu", parsing);
-    renderQueue ()
     } 
     removeFromQueue.classList.add('hide-btn')
     addToQueue.classList.remove('hide-btn')
   })
-  
-    // containerCard.insertAdjacentHTML('beforeend', await makeMarkup(array));
+
 }
 
 function makeMarkupModal({

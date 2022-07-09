@@ -1,7 +1,7 @@
 import { storage } from './storage';
 import { makeMarkupLib } from './renderFunctions';
 import { openModal } from './renderFunctions';
-import { renderWatched } from './renderLib';
+
 const refs = {
     watchBtn: document.querySelector('#header-watched-button'),
     queueBtn: document.querySelector('#header-queue-button'),
@@ -19,14 +19,18 @@ containerCard.addEventListener('click', (event)=>{
 });
     
 renderWatched()
-
+async function renderWatched() {
+    const parsing = storage.readItem("watched")
+    if (parsing) {
+        containerCard.innerHTML = await makeMarkupLib(parsing)
+    }
+}
 refs.watchBtn.addEventListener('click',async () => {
     const parsing = storage.readItem("watched")
     console.log(parsing)
     if (parsing) {
         containerCard.innerHTML = "";
         containerCard.innerHTML=await makeMarkupLib(parsing)
-        // containerCard.insertAdjacentHTML('beforeend', makeMarkup(parsing))
     } else {
         containerCard.innerHTML = "List is empty";
     }
@@ -38,7 +42,6 @@ refs.queueBtn.addEventListener('click', async () => {
     if (parsing) {
         containerCard.innerHTML = "";
           containerCard.innerHTML=await makeMarkupLib(parsing)
-    // containerCard.insertAdjacentHTML('beforeend', makeMarkup(parsing)) 
     } else {
         containerCard.innerHTML = "List is empty";
     }
@@ -67,3 +70,4 @@ function onQueueBtnClick() {
     }
  
 }
+
