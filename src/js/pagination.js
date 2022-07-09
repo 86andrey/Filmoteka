@@ -58,6 +58,10 @@ export function createPagination({ page, total_results }) {
 
   // рендерим пагинацию
   pagination.on('afterMove', async event => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
     const currentPage = event.page;
     // const searchQuery = input.value;
     const parsing = storage.readItem('watched');

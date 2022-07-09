@@ -1,6 +1,7 @@
 import { storage } from './storage';
 import { makeMarkupLib } from './renderFunctions';
 import { openModal } from './renderFunctions';
+import './btm-to-top';
 import {
   createPagination,
   paginationSettings,
