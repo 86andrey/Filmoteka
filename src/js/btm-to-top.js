@@ -5,7 +5,7 @@ import throttle from 'lodash.throttle';
 function trackScroll() {
   const scrolled = window.pageYOffset;
   const coords = 500;
-  //   console.log(coords);
+  console.log(coords);
 
   if (scrolled > coords) {
     goTopBtn.classList.add('back_to_top-show');
