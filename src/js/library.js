@@ -7,7 +7,8 @@ const refs = {
     queueBtn: document.querySelector('#header-queue-button'),
 };
   const modal=document.querySelector('.modal__card-overlay');
-const containerCard = document.querySelector('.container-card')
+const containerCard = document.querySelector('.container-card');
+const containerPlaceholder = document.querySelector('.container-placeholder');
 
 containerCard.addEventListener('click', (event)=>{
     const movieClick =event.path[2]
@@ -21,29 +22,28 @@ containerCard.addEventListener('click', (event)=>{
 renderWatched()
 async function renderWatched() {
     const parsing = storage.readItem("watched")
-    if (parsing) {
-        containerCard.innerHTML = await makeMarkupLib(parsing)
+    if (parsing.length===0) {containerPlaceholder.classList.remove('is-hidden');
+    } else{ containerPlaceholder.classList.add('is-hidden');
+        containerCard.innerHTML = await makeMarkupLib(parsing);
     }
 }
 refs.watchBtn.addEventListener('click',async () => {
     const parsing = storage.readItem("watched")
     console.log(parsing)
-    if (parsing) {
-        containerCard.innerHTML = "";
-        containerCard.innerHTML=await makeMarkupLib(parsing)
-    } else {
-        containerCard.innerHTML = "List is empty";
-    }
+    if (parsing.length===0) { containerCard.innerHTML='';
+        containerPlaceholder.classList.remove('is-hidden');
+} else{ containerPlaceholder.classList.add('is-hidden');
+    containerCard.innerHTML = await makeMarkupLib(parsing);
+}
     onWatchBtnClick();
 });
 
 refs.queueBtn.addEventListener('click', async () => {
         const parsing = storage.readItem("qu")
-    if (parsing) {
-        containerCard.innerHTML = "";
-          containerCard.innerHTML=await makeMarkupLib(parsing)
-    } else {
-        containerCard.innerHTML = "List is empty";
+        if (parsing.length===0) { containerCard.innerHTML='';
+            containerPlaceholder.classList.remove('is-hidden');
+    } else{ containerPlaceholder.classList.add('is-hidden');
+        containerCard.innerHTML = await makeMarkupLib(parsing);
     }
     onQueueBtnClick();
 })
