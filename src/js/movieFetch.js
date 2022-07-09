@@ -26,11 +26,14 @@ export default class MovieApiService {
   }
 
   async fetchPopularPagination(currentPage) {
+    const target = document.querySelector('.container-card');
+    const spinner = new Spinner(opts).spin(target);
     try {
       const url = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${currentPage}`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
+      spinner.stop();
       return data;
     } catch (error) {
       console.log(error, 'fetchPopularPagination');
@@ -39,23 +42,28 @@ export default class MovieApiService {
 
   // метод получения массива фильмов по запросу.
   async fetchByQuery(searchQuery) {
+    const target = document.querySelector('.container-card');
+    const spinner = new Spinner(opts).spin(target);
     try {
       const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false`;
       const response = await fetch(url);
-      console.log(response.status);
+
       const data = await response.json();
-      return await data;
+      spinner.stop();
+      return data;
     } catch (error) {
       console.log(error);
     }
   }
 
   async fetchByQueryPagination(searchQuery, currentPage) {
+    const target = document.querySelector('.container-card');
+    const spinner = new Spinner(opts).spin(target);
     try {
       const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=false`;
       const response = await fetch(url);
       const data = await response.json();
-
+      spinner.stop();
       return data;
     } catch (error) {
       console.log(error);
