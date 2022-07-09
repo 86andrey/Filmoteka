@@ -1,5 +1,6 @@
 import MovieApiService from './movieFetch';
 import { storage } from './storage';
+
 const movie = new MovieApiService();
 
 const containerCard = document.querySelector('.container-card');
@@ -8,6 +9,7 @@ const errorMessage = document.querySelector('.header-error-container');
 
 // Функция для отображения карточек
 export async function renderMarkup(movies) {
+  console.log(movies);
   containerCard.innerHTML = await makeMarkup(movies.results);
 }
 
@@ -82,7 +84,7 @@ function makeMarkup(array) {
 
       return `
                   <div class="container-card_single-card" data-id="${id}" >
-                    <a href="" src="">
+                    
                       <div class="poster">
                           <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
                       </div>
@@ -92,7 +94,7 @@ function makeMarkup(array) {
                             ${genreMain.join(', ')} | ${newReleaseDate}
                         </p>
                       </div>
-                    </a>
+                    
                   </div> 
         `;
     })
@@ -105,7 +107,6 @@ export async function makeMarkupLib(array) {
       const newReleaseDate = release_date.split('-')[0];
       const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
       console.log(allgenres);
-      allgenres.slice(0, 3);
       if (allgenres.length === 3) {
         allgenres.splice(2, 1, 'Other');
       }
@@ -127,21 +128,47 @@ export async function makeMarkupLib(array) {
 }
 
 export async function openModal(movieId) {
-  const data = await movie.fetchById(movieId);
-  // console.log(array);
-  containerModal.innerHTML = await makeMarkupModal(data);
+    
+    const data = await movie.fetchById(movieId);
+    // console.log(array);
+    containerModal.innerHTML=await makeMarkupModal(data);
+    
+    const modalCloseBtn=document.querySelector('.modal__close');
+    const modal=document.querySelector('.modal__card-overlay');
 
-  const modalCloseBtn = document.querySelector('.modal__close');
-  const modal = document.querySelector('.modal__card-overlay');
-  modalCloseBtn.addEventListener('click', () => {
-    modal.classList.add('is-hidden');
-  });
+      //МОДАЛКА ЗАКРЫТА КРЕСТИКОМ
+      modalCloseBtn.addEventListener('click', closeByCross);
+      function closeByCross() {
+          modalCloseBtn.removeEventListener('click', closeByCross);
+          modal.classList.add('is-hidden')
+          // console.log("модалка закрита(крестиком)");
+      }
+  
+      //МОДАЛКА ЗАКРЫТА ФОНОМ
+      modal.addEventListener('click', closeByOverlay);
+      function closeByOverlay(e) {
+        if (e.target === modal) {
+          modal.removeEventListener('click', closeByOverlay);
+          modal.classList.add('is-hidden')
+          // console.log("модалка закрита(фоном)");
+        }
+      }
 
-  const addToWatched = document.querySelector('.modal__btn-1add');
-  const addToQueue = document.querySelector('.modal__btn-2add');
-  const removeFromWatched = document.querySelector('.modal__btn-1remove');
-  const removeFromQueue = document.querySelector('.modal__btn-2remove');
-
+      //МОДАЛКА ЗАКРЫТА esc
+      window.addEventListener('keydown', closeByEsc);
+      function closeByEsc(e) {
+        if (e.keyCode === 27) {
+            window.removeEventListener('keydown', closeByEsc);
+            modal.classList.add('is-hidden')
+            // console.log("модалка закрита(Esc)");
+        }
+      }
+  
+  const addToWatched = document.querySelector(".modal__btn-1add")
+  const addToQueue = document.querySelector(".modal__btn-2add")
+  const removeFromWatched = document.querySelector(".modal__btn-1remove")
+  const removeFromQueue = document.querySelector(".modal__btn-2remove")
+  
   // ФУНКЦИИ СОХРАНЕНИЯ КНОПОК
 
   saveQueueBtn();
@@ -181,94 +208,89 @@ export async function openModal(movieId) {
     }
   }
   // ФУНКЦИИ ДОБАВЛЕНИЯ И ПЕРЕЗАПИСИ В LOCALSTORAGE
-
+  
   addToWatched.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId);
-    const result = storage.readItem('watched', []);
+    const data = await movie.fetchById(movieId)
+    const result = storage.readItem("watched", []);
     const parsing = storage.readItem('qu');
     if (parsing) {
       const movieTitle = data.title;
-      const checkMovie = parsing.findIndex(
-        option => option.title === movieTitle
-      );
+      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
       if (checkMovie >= 0) {
-        const removMovie = parsing.splice(checkMovie, 1);
-        storage.addItem('qu', parsing);
-        result.push(data);
-        storage.addItem('watched', result);
+      const removMovie = parsing.splice(checkMovie, 1)
+        storage.addItem("qu", parsing)
+      result.push(data);
+      storage.addItem("watched", result);
       } else if (checkMovie === -1) {
-        result.push(data);
-        storage.addItem('watched', result);
+      result.push(data);
+      storage.addItem("watched", result);
       }
     } else {
       result.push(data);
-      storage.addItem('watched', result);
+      storage.addItem("watched", result);
     }
-    addToWatched.classList.add('hide-btn');
-    removeFromWatched.classList.remove('hide-btn');
-    removeFromQueue.classList.add('hide-btn');
-    addToQueue.classList.remove('hide-btn');
-  });
+    addToWatched.classList.add('hide-btn')
+    removeFromWatched.classList.remove('hide-btn')
+     removeFromQueue.classList.add('hide-btn')
+    addToQueue.classList.remove('hide-btn')
+  })
 
   addToQueue.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId);
-    const result = storage.readItem('qu', []);
+    const data = await movie.fetchById(movieId)
+    const result = storage.readItem("qu", []);
     const parsing = storage.readItem('watched');
     if (parsing) {
       const movieTitle = data.title;
-      const checkMovie = parsing.findIndex(
-        option => option.title === movieTitle
-      );
+      const checkMovie = parsing.findIndex(option => option.title === movieTitle)
       if (checkMovie >= 0) {
-        const removMovie = parsing.splice(checkMovie, 1);
-        storage.addItem('watched', parsing);
-        result.push(data);
-        storage.addItem('qu', result);
+      const removMovie = parsing.splice(checkMovie, 1)
+        storage.addItem("watched", parsing)
+      result.push(data);
+        storage.addItem("qu", result);
       } else if (checkMovie === -1) {
-        result.push(data);
-        storage.addItem('qu', result);
+      result.push(data);
+       storage.addItem("qu", result);
       }
     } else {
       result.push(data);
-      storage.addItem('qu', result);
+      storage.addItem("qu", result);
     }
-    addToQueue.classList.add('hide-btn');
-    removeFromQueue.classList.remove('hide-btn');
-    removeFromWatched.classList.add('hide-btn');
-    addToWatched.classList.remove('hide-btn');
-  });
+    addToQueue.classList.add('hide-btn')
+    removeFromQueue.classList.remove('hide-btn')
+      removeFromWatched.classList.add('hide-btn')
+    addToWatched.classList.remove('hide-btn')
+   
+  })
 
-  // ФУНКЦИИ УДАЛЕНИЯ ИЗ LOCALSTORAGE
-
-  removeFromWatched.addEventListener('click', () => {
-    const parsing = storage.readItem('watched');
-    const movieTitle = data.title;
-    const checkMovie = parsing.findIndex(option => option.title === movieTitle);
-    if (checkMovie === -1) {
-      console.log('error');
-    } else {
-      const removMovie = parsing.splice(checkMovie, 1);
-      storage.addItem('watched', parsing);
-    }
-    removeFromWatched.classList.add('hide-btn');
-    addToWatched.classList.remove('hide-btn');
-  });
-
+ // ФУНКЦИИ УДАЛЕНИЯ ИЗ LOCALSTORAGE
+  removeFromWatched.addEventListener('click', async () => {
+      const parsing = storage.readItem('watched');
+  const movieTitle = data.title
+    const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+  if (checkMovie === -1) {
+    console.log("error")
+  } else {
+    const removMovie = parsing.splice(checkMovie, 1)
+    storage.addItem("watched", parsing);
+    } 
+    removeFromWatched.classList.add('hide-btn')
+    addToWatched.classList.remove('hide-btn')
+  })
+  
   removeFromQueue.addEventListener('click', () => {
-    const parsing = storage.readItem('qu');
-    const movieTitle = data.title;
-    const checkMovie = parsing.findIndex(option => option.title === movieTitle);
-    if (checkMovie === -1) {
-      console.log('error');
-    } else {
-      const removMovie = parsing.splice(checkMovie, 1);
-      storage.addItem('qu', parsing);
-    }
-    removeFromQueue.classList.add('hide-btn');
-    addToQueue.classList.remove('hide-btn');
-  });
+      const parsing = storage.readItem('qu');
+  const movieTitle = data.title
+    const checkMovie = parsing.findIndex(option => option.title === movieTitle)
+  if (checkMovie === -1) {
+    console.log("error")
+  }else {
+    const removMovie = parsing.splice(checkMovie, 1)
+    storage.addItem("qu", parsing);
+    } 
+    removeFromQueue.classList.add('hide-btn')
+    addToQueue.classList.remove('hide-btn')
+  })
 
-  // containerCard.insertAdjacentHTML('beforeend', await makeMarkup(array));
 }
 
 function makeMarkupModal({
@@ -285,8 +307,8 @@ function makeMarkupModal({
   allgenres.slice(0, 3);
   return `
     <button type="button" class="modal__close" data-modal-close>
-      <svg class="modal__close-svg">
-        X
+      <svg class="icon modal-close-btn__icon" width="16" height="16">
+          <use href="/src/images/icons.svg#icon-X"
       </svg>
     </button>
   <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" class="modal__img" />
@@ -295,35 +317,24 @@ function makeMarkupModal({
     <div class="modal__info-block">
       <ul class="modal__info discription__modal">
         <li class="discription__modal-item">
-          <p class="discription__modal-title">Vote / Votes</p>
-        </li>
-        <li class="discription__modal-item">
-          <p class="discription__modal-title">Popularity</p>
-        </li>
-        <li class="discription__modal-item">
-          <p class="discription__modal-title">Original Title</p>
-        </li>
-        <li class="discription__modal-item">
-          <p class="discription__modal-title">Genre</p>
-        </li>
-      </ul>
-      
-      <ul class="modal__info">
-        <li class="discription__modal-item">
+          <h4 class="discription__modal-title">Vote / Votes</h4>
           <p class="discription__modal-text">
-          <span class="discription__modal-text-vote">${vote_average}</span>
-          <span class="discription__modal-text-slash">/</span>
-          <span class="discription__modal-text-votes">${vote_count}</span>
+            <span class="discription__modal-text-vote">${vote_average}</span>
+            <span class="discription__modal-text-slash">/</span>
+            <span class="discription__modal-text-votes">${vote_count}</span>
           </p>
         </li>
         <li class="discription__modal-item">
+          <h4 class="discription__modal-title">Popularity</h4>
           <p class="discription__modal-text">${popularity.toFixed(1)}</p>
         </li>
         <li class="discription__modal-item">
+          <h4 class="discription__modal-title">Original Title</h4>
           <p class="discription__modal-text">${original_title}</p>
         </li>
         <li class="discription__modal-item">
-          <p class="discription__modal-text">${allgenres} </p>
+          <h4 class="discription__modal-title">Genre</h4>
+          <p class="discription__modal-text">${allgenres.join(", ")}</p>
         </li>
       </ul>
     </div>

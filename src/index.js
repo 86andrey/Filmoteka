@@ -10,6 +10,7 @@ import { openModal } from './js/renderFunctions.js';
 // const movie = new MovieApiService();
 export const form = document.querySelector('.header-input-container');
 export const input = document.querySelector('#search-box');
+const paginationEl = document.querySelector('#tui-pagination-container');
 
 //функция поиска по запросу
 form.addEventListener('submit', onBtnSearch);
@@ -22,8 +23,6 @@ function onBtnSearch(evt) {
       console.log('надо ввести фильм');
     }
     if (searchQuery === evt.target[0].value) {
-      // Зроби щось там
-      console.log('Тут щось ввели', searchQuery);
       createFilmsBySearch(searchQuery);
     }
   } catch {
