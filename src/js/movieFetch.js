@@ -97,11 +97,14 @@ export default class MovieApiService {
 
   // метод получения инфо о фильме по айдишке
   async fetchById(movieId) {
+    const target = document.querySelector('.container-card');
+    const spinner = new Spinner(opts).spin(target);
     try {
       const url = `${BASE_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`;
       const response = await fetch(url);
       const data = await response.json();
       // console.log(data);
+      spinner.stop();
       return data;
     } catch (error) {
       console.log(error);

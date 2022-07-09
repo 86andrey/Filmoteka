@@ -49,6 +49,10 @@ export function createPagination({ page, total_results }) {
   // console.dir(pagination);
 
   pagination.on('afterMove', async event => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
     const currentPage = event.page;
     const searchQuery = input.value;
     console.log(searchQuery);
