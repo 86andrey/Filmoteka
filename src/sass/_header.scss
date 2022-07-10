@@ -1,5 +1,5 @@
 .site-header {
-    position: sticky;
+    position: relative;
     top: 0;
     background: $header-background;
     background-image: url("../images/header/abstract-background-with-red-lines 1.jpg");
@@ -23,6 +23,18 @@
 
     margin-left: 32px;
     margin-right: 32px;
+
+    @media screen and(min-width: 1280px) {
+        width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: space-between;
+        padding-left: 32px;
+        padding-right: 32px;
+        
+        }
+
+    
 }
 
 .site-header-logo-container {
@@ -108,6 +120,10 @@
     @media screen and (max-width: 320px) {
         width: 280px;
     }
+
+     @media screen and(min-width: 1280px) {
+        width: 394px;
+    }
 }
 
 .search-box-input {
@@ -128,8 +144,10 @@
 
     background: transparent;
     border: none;
+    color: $primary-white-color;
 
     border-bottom: 0.5px solid $primary-white-color;
+
 
     &::placeholder {
         font-size: 14px;
@@ -138,6 +156,15 @@
         align-items: center;
         color: $primary-white-color;
     }
+
+    &:focus {
+        outline: none;
+        
+        &::placeholder {
+            color: #FF001B;
+              }
+          }
+          
 
           @media screen and (max-width: 480px) {
               width: 100%;
@@ -161,8 +188,9 @@
     &:hover,
     &:focus {
         cursor: pointer;
-        stroke: #ff6b08;
+        stroke: #FF001B;
         }
+
 }
 
 
@@ -266,6 +294,18 @@
         color: #FF6B01;
         border: 1px solid #FF6B01;
     }
+}
+
+.site-header-logo-container-link {
+    text-decoration: none;
+}
+
+// обработка ошибки поиска
+
+.header-error-container.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
 }
 
 

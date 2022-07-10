@@ -136,7 +136,7 @@ export default new Swiper('.image-slider', {
 
 });
 
- const onCloseSlider = document.querySelector('.slider-on');
+ 
 const onSliderOpen = document.querySelector('.slider-open');
 const wrapper = document.querySelector('.wrapper');
 
@@ -144,19 +144,19 @@ onSliderOpen.addEventListener('click', toogleSliderHandler);
 wrapper.addEventListener('click', onBackdropClick);
 
 
-function toogleSliderHandler() {
+ export function toogleSliderHandler() {
  window.addEventListener('keydown', onEscKeyPress);
     wrapper.classList.toggle('hide'); 
 } 
  
- function onBackdropClick(event) {
+ export function onBackdropClick(event) {
     if (event.currentTarget === event.target) {
         toogleSliderHandler();
         console.log('click');
     }
   }
 
-   function onEscKeyPress(event) {
+  export function onEscKeyPress(event) {
     const ESC_KEY_CODE = 'Escape';
     const isEscKey = event.code === ESC_KEY_CODE;
 
