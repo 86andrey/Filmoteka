@@ -49,7 +49,7 @@ function makeMarkup(array) {
         { id: 10752, name: 'War' },
         { id: 37, name: 'Western' },
       ];
-      console.log(typeof poster_path);
+      // console.log(typeof poster_path);
       const genreMain = genre_ids.reduce((acc, id) => {
         const movieGenre = ganresArray.filter(genre => genre.id === id)[0];
         acc.push(movieGenre.name);

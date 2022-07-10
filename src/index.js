@@ -4,7 +4,7 @@ import { createFilmsByPopular, createFilmsBySearch } from './js/createFilms.js';
 import { openModal } from './js/renderFunctions.js';
  import { onBackdropClick, toogleSliderHandler, onEscKeyPress } from './js/modalFooter';
 
- import Swiper from './js/modalFooter';
+ import './js/modalFooter';
 //скрипт меняет стили кнопок в хедере
 //import './js/header_styles.js';
  
@@ -29,7 +29,7 @@ function onBtnSearch(evt) {
     evt.preventDefault();
     const searchQuery = evt.target[0].value;
     if (searchQuery === '') {
-      console.log('надо ввести фильм');
+      // console.log('надо ввести фильм');
     }
     if (searchQuery === evt.target[0].value) {
       createFilmsBySearch(searchQuery);
@@ -59,7 +59,7 @@ containerCard.addEventListener('click', event => {
 });
 
 
-const swiper = new Swiper();
+// const swiper = new Swiper();
 //оптимизация роботи модалки
 // (() => {
 //   const refs = {

@@ -9,12 +9,12 @@ import {
 } from './pagination';
 import { WATCHED_SEARCH_TYPE, QUEUE_SEARCH_TYPE } from './searchTypes';
 
-import { onBackdropClick, toogleSliderHandler, onEscKeyPress } from './modalFooter';
-
-import Swiper from './modalFooter';
+// import { onBackdropClick, toogleSliderHandler, onEscKeyPress } from './modalFooter';
+import '../js/modalFooter';
+// import Swiper from './modalFooter';
 
 const parsing = storage.readItem('watched');
-console.log(parsing);
+// console.log(parsing);
 const refs = {
   watchBtn: document.querySelector('#header-watched-button'),
   queueBtn: document.querySelector('#header-queue-button'),
@@ -37,13 +37,13 @@ renderWatched();
 async function renderWatched() {
   const parsing = storage.readItem('watched');
   const parsingPage = addPageToArray(1, parsing);
-  console.log(parsingPage.results.length);
+  // console.log(parsingPage.results.length);
   if (parsingPage.results.length === 0) {
-    console.log('Нет данных');
+    // console.log('Нет данных');
     containerPlaceholder.classList.remove('visually-hidden');
   }
   if (parsingPage.total_results > 20) {
-    console.log(createPagination(parsingPage));
+    // console.log(createPagination(parsingPage));
 
     paginationSettings.searchType = WATCHED_SEARCH_TYPE;
   }
@@ -59,14 +59,14 @@ async function renderWatched() {
 refs.watchBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('watched');
   const parsingPage = addPageToArray(1, parsing);
-  console.log(parsingPage.results);
+  // console.log(parsingPage.results);
   if (parsing.length === 0) {
-    console.log('Нет данных watchbtn');
+    // console.log('Нет данных watchbtn');
     containerCard.innerHTML = '';
     containerPlaceholder.classList.remove('visually-hidden');
   }
   if (parsingPage.total_results > 20) {
-    console.log(createPagination(parsingPage));
+    // console.log(createPagination(parsingPage));
 
     paginationSettings.searchType = WATCHED_SEARCH_TYPE;
   }
@@ -83,20 +83,20 @@ refs.watchBtn.addEventListener('click', async () => {
 refs.queueBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('qu');
   const paginationEl = document.querySelector('#tui-pagination-container');
-  console.log(parsing);
+  // console.log(parsing);
   const parsingPage = addPageToArray(1, parsing);
-  console.log(parsingPage);
+  // console.log(parsingPage);
   paginationEl.innerHTML = '';
   containerCard.innerHTML = '';
 
   if (parsing.length === 0) {
-    console.log('Нет данных queqeeq');
+    // console.log('Нет данных queqeeq');
     containerCard.innerHTML = '';
     containerPlaceholder.classList.remove('visually-hidden');
   }
   if (parsingPage.total_results > 20) {
-    console.log('Пагинация By Queue');
-    console.log(createPagination(parsingPage));
+    // console.log('Пагинация By Queue');
+    // console.log(createPagination(parsingPage));
 
     paginationSettings.searchType = QUEUE_SEARCH_TYPE;
   }
