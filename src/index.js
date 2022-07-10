@@ -26,7 +26,7 @@ const advertBtnClose = () => {
 };
 advertCloseBtn.addEventListener('click', advertBtnClose);
 setTimeout(
-  () => advertContainer.removeEventListener('click', advertBtnClose),
+  () => advertCloseBtn.removeEventListener('click', advertBtnClose),
   5000
 );
 
