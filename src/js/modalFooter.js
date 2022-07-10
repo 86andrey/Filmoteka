@@ -1,5 +1,6 @@
 
-export default new Swiper('.image-slider', {
+const swiper= new Swiper('.image-slider', {
+  
     // стрелки
     navigation: {
         nextEl: '.swiper-button-next',

@@ -9,7 +9,7 @@ const movie = new MovieApiService();
 export async function createFilmsByPopular() {
   try {
     const movies = await movie.fetchPopular();
-    console.log(movies);
+    // console.log(movies);
     if (movies.total_results > 20) {
       createPagination(movies);
 
