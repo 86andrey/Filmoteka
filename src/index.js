@@ -1,13 +1,17 @@
-import './js/btm-to-top';
+// import './js/btm-to-top';
 import MovieApiService from './js/movieFetch.js';
 import { createFilmsByPopular, createFilmsBySearch } from './js/createFilms.js';
 import { openModal } from './js/renderFunctions.js';
- import { onBackdropClick, toogleSliderHandler, onEscKeyPress } from './js/modalFooter';
+import './js/modalFooter';
+import { trackScroll } from './js/btm-to-top';
+import throttle from 'lodash.throttle';
 
- import './js/modalFooter';
+import './js/modalFooter';
 //скрипт меняет стили кнопок в хедере
 //import './js/header_styles.js';
- 
+const goTopBtn = document.querySelector('.back_to_top');
+console.log(goTopBtn);
+window.addEventListener('scroll', throttle(trackScroll, 500));
 // объявляем экземпляр класса и елементы
 // const movie = new MovieApiService();
 export const form = document.querySelector('.header-input-container');
@@ -15,11 +19,16 @@ export const input = document.querySelector('#search-box');
 const paginationEl = document.querySelector('#tui-pagination-container');
 
 //всплывающий репета
-const advertCloseBtn = document.querySelector('.advert__button-close')
-const advertContainer = document.querySelector('.advert')
-const advertBtnClose = ()=>{advertContainer.classList.add('is-hidden');}
-advertCloseBtn.addEventListener('click',  advertBtnClose);
-setTimeout(()=>advertContainer.removeEventListener('click', advertBtnClose), 5000);
+const advertCloseBtn = document.querySelector('.advert__button-close');
+const advertContainer = document.querySelector('.advert');
+const advertBtnClose = () => {
+  advertContainer.classList.add('is-hidden');
+};
+advertCloseBtn.addEventListener('click', advertBtnClose);
+setTimeout(
+  () => advertContainer.removeEventListener('click', advertBtnClose),
+  5000
+);
 
 //функция поиска по запросу
 form.addEventListener('submit', onBtnSearch);
@@ -57,7 +66,6 @@ containerCard.addEventListener('click', event => {
   const movieId = movieClick.dataset.id;
   openModal(movieId);
 });
-
 
 // const swiper = new Swiper();
 //оптимизация роботи модалки
