@@ -1,7 +1,10 @@
 import { storage } from './storage';
+import { trackScroll } from './btm-to-top';
+import throttle from 'lodash.throttle';
+
 import { makeMarkupLib } from './renderFunctions';
 import { openModal } from './renderFunctions';
-import './btm-to-top';
+// import './btm-to-top';
 import {
   createPagination,
   paginationSettings,
@@ -12,7 +15,9 @@ import { WATCHED_SEARCH_TYPE, QUEUE_SEARCH_TYPE } from './searchTypes';
 // import { onBackdropClick, toogleSliderHandler, onEscKeyPress } from './modalFooter';
 import '../js/modalFooter';
 // import Swiper from './modalFooter';
-
+const goTopBtn = document.querySelector('.back_to_top');
+console.log(goTopBtn);
+window.addEventListener('scroll', throttle(trackScroll, 500));
 const parsing = storage.readItem('watched');
 // console.log(parsing);
 const refs = {
@@ -36,78 +41,88 @@ containerCard.addEventListener('click', event => {
 renderWatched();
 async function renderWatched() {
   const parsing = storage.readItem('watched');
-  const parsingPage = addPageToArray(1, parsing);
+  if (parsing) {
+    const parsingPage = addPageToArray(1, parsing);
+    if (parsingPage.total_results > 20) {
+      // console.log(createPagination(parsingPage));
+
+      paginationSettings.searchType = WATCHED_SEARCH_TYPE;
+    }
+
+    if (parsingPage.results.length < 21) {
+      containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+    }
+    if (parsingPage.results.length !== 0) {
+      containerPlaceholder.classList.add('visually-hidden');
+    }
+  }
+  // const parsingPage = addPageToArray(1, parsing);
   // console.log(parsingPage.results.length);
-  if (parsingPage.results.length === 0) {
-    // console.log('Нет данных');
-    containerPlaceholder.classList.remove('visually-hidden');
-  }
-  if (parsingPage.total_results > 20) {
-    // console.log(createPagination(parsingPage));
-
-    paginationSettings.searchType = WATCHED_SEARCH_TYPE;
-  }
-
-  if (parsingPage.results.length < 21) {
-    containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
-  }
-  if (parsingPage.results.length !== 0) {
-    containerPlaceholder.classList.add('visually-hidden');
-  }
+  // if (parsingPage.results.length === 0) {
+  //   // console.log('Нет данных');
+  //   containerPlaceholder.classList.remove('visually-hidden');
+  // }
 }
 
 refs.watchBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('watched');
-  const parsingPage = addPageToArray(1, parsing);
-  // console.log(parsingPage.results);
-  if (parsing.length === 0) {
-    // console.log('Нет данных watchbtn');
-    containerCard.innerHTML = '';
-    containerPlaceholder.classList.remove('visually-hidden');
-  }
-  if (parsingPage.total_results > 20) {
-    // console.log(createPagination(parsingPage));
+  if (parsing) {
+    const parsingPage = addPageToArray(1, parsing);
 
-    paginationSettings.searchType = WATCHED_SEARCH_TYPE;
+    // console.log(parsingPage.results);
+    // if (parsing.length === 0) {
+    //   // console.log('Нет данных watchbtn');
+    //   containerCard.innerHTML = '';
+    //   containerPlaceholder.classList.remove('visually-hidden');
+    // }
+    if (parsingPage.total_results > 20) {
+      // console.log(createPagination(parsingPage));
+
+      paginationSettings.searchType = WATCHED_SEARCH_TYPE;
+    }
+    if (parsingPage.results.length < 21) {
+      // containerCard.innerHTML = '';
+      containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+    }
+    if (parsingPage.results.length !== 0) {
+      containerPlaceholder.classList.add('visually-hidden');
+    }
   }
-  if (parsingPage.results.length < 21) {
-    // containerCard.innerHTML = '';
-    containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
-  }
-  if (parsingPage.results.length !== 0) {
-    containerPlaceholder.classList.add('visually-hidden');
-  }
+
   onWatchBtnClick();
 });
 
 refs.queueBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('qu');
-  const paginationEl = document.querySelector('#tui-pagination-container');
-  // console.log(parsing);
-  const parsingPage = addPageToArray(1, parsing);
-  // console.log(parsingPage);
-  paginationEl.innerHTML = '';
-  containerCard.innerHTML = '';
-
-  if (parsing.length === 0) {
-    // console.log('Нет данных queqeeq');
+  if (parsing) {
+    const paginationEl = document.querySelector('#tui-pagination-container');
+    // console.log(parsing);
+    const parsingPage = addPageToArray(1, parsing);
+    // console.log(parsingPage);
+    paginationEl.innerHTML = '';
     containerCard.innerHTML = '';
-    containerPlaceholder.classList.remove('visually-hidden');
-  }
-  if (parsingPage.total_results > 20) {
-    // console.log('Пагинация By Queue');
-    // console.log(createPagination(parsingPage));
 
-    paginationSettings.searchType = QUEUE_SEARCH_TYPE;
+    // if (parsing.length === 0) {
+    //   // console.log('Нет данных queqeeq');
+    //   containerCard.innerHTML = '';
+    //   containerPlaceholder.classList.remove('visually-hidden');
+    // }
+    if (parsingPage.total_results > 20) {
+      // console.log('Пагинация By Queue');
+      // console.log(createPagination(parsingPage));
+
+      paginationSettings.searchType = QUEUE_SEARCH_TYPE;
+    }
+
+    if (parsingPage.results.length < 21) {
+      // containerCard.innerHTML = '';
+      containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+    }
+    if (parsingPage.results.length !== 0) {
+      containerPlaceholder.classList.add('visually-hidden');
+    }
   }
 
-  if (parsingPage.results.length < 21) {
-    // containerCard.innerHTML = '';
-    containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
-  }
-  if (parsingPage.results.length !== 0) {
-    containerPlaceholder.classList.add('visually-hidden');
-  }
   onQueueBtnClick();
 });
 
