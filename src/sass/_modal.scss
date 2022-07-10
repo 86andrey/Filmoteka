@@ -65,6 +65,7 @@
     height: 16px;
     fill: #000;
     transition: 250ms fill cubic-bezier(0.4, 0, 0.2, 1);
+    stroke: #000;
 }
 
 .modal__img {
@@ -195,6 +196,7 @@
 
 .about__modal{
     margin-bottom: 20px;
+    overflow-y: auto;
     @media screen and(min-width: 768px) and (max-width: 1023px) {
         width: 264px;
     }
@@ -223,13 +225,14 @@
     font-size: 12px;
     line-height: 20px;
     color: #000000;
-    overflow: scroll;
+    
+    height: 160px;
     @media screen and(min-width: 768px) and (max-width: 1023px) {
-            height: 220px;
+            height: 260px;
         }
     @media screen and(max-width:767px) {
         height: 180px;
-            line-height: 15px;
+        line-height: 15px;
         }
 }
 

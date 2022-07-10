@@ -289,6 +289,8 @@ export async function openModal(movieId) {
   });
 }
 
+import sprite from '../images/icons.svg';
+const closeIcon = `${sprite}#icon-close`;
 function makeMarkupModal({
   poster_path,
   original_title,
@@ -303,6 +305,9 @@ function makeMarkupModal({
   allgenres.slice(0, 3);
   return `
     <button type="button" class="modal__close" data-modal-close>
+    <svg width="12" height="12" class="modal-close-btn__icon">
+    <use href="${closeIcon}"></use>
+</svg>
     </button>
   <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" class="modal__img" />
   <div class="modal__info">
