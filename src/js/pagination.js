@@ -105,7 +105,7 @@ export function addPageToArray(currentPage, parsing) {
   let notesOnPage = 20;
   let page = currentPage;
 
-  total_results = parsing.length;
+  const total_results = parsing.length;
   console.log(parsing.length);
 
   let startPage = (page - 1) * notesOnPage;
