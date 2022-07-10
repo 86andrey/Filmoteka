@@ -9,6 +9,10 @@ import {
 } from './pagination';
 import { WATCHED_SEARCH_TYPE, QUEUE_SEARCH_TYPE } from './searchTypes';
 
+import { onBackdropClick, toogleSliderHandler, onEscKeyPress } from './modalFooter';
+
+import Swiper from './modalFooter';
+
 const parsing = storage.readItem('watched');
 console.log(parsing);
 const refs = {
@@ -160,3 +164,5 @@ function onQueueBtnClick() {
 //   }
 //   onQueueBtnClick();
 // });
+
+const swiper = new Swiper();

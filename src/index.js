@@ -2,10 +2,12 @@ import './js/btm-to-top';
 import MovieApiService from './js/movieFetch.js';
 import { createFilmsByPopular, createFilmsBySearch } from './js/createFilms.js';
 import { openModal } from './js/renderFunctions.js';
+ import { onBackdropClick, toogleSliderHandler, onEscKeyPress } from './js/modalFooter';
 
+ import Swiper from './js/modalFooter';
 //скрипт меняет стили кнопок в хедере
 //import './js/header_styles.js';
-
+ 
 // объявляем экземпляр класса и елементы
 // const movie = new MovieApiService();
 export const form = document.querySelector('.header-input-container');
@@ -54,6 +56,8 @@ containerCard.addEventListener('click', event => {
   openModal(movieId);
 });
 
+
+const swiper = new Swiper();
 //оптимизация роботи модалки
 // (() => {
 //   const refs = {
