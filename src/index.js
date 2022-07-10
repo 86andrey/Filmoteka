@@ -16,8 +16,10 @@ const paginationEl = document.querySelector('#tui-pagination-container');
 
 //всплывающий репета
 const advertCloseBtn = document.querySelector('.advert__button-close')
-const advertContainet = document.querySelector('.advert')
-advertCloseBtn.addEventListener('click', ()=>{advertContainet.classList.add('is-hidden')})
+const advertContainer = document.querySelector('.advert')
+const advertBtnClose = ()=>{advertContainer.classList.add('is-hidden');}
+advertCloseBtn.addEventListener('click',  advertBtnClose);
+setTimeout(()=>advertContainer.removeEventListener('click', advertBtnClose), 5000);
 
 //функция поиска по запросу
 form.addEventListener('submit', onBtnSearch);
