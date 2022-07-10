@@ -307,9 +307,6 @@ function makeMarkupModal({
   allgenres.slice(0, 3);
   return `
     <button type="button" class="modal__close" data-modal-close>
-      <svg class="icon modal-close-btn__icon" width="16" height="16">
-          <use href="/src/images/icons.svg#icon-X"
-      </svg>
     </button>
   <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" class="modal__img" />
   <div class="modal__info">
