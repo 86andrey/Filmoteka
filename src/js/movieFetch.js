@@ -111,6 +111,20 @@ export default class MovieApiService {
     }
   }
 
+  // метод получения ссылки на video
+  async fetchVideoById(movieId) {
+      try {
+      const url = `${BASE_URL}movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+      const response = await fetch(url);
+      const data = await response.json();
+      // console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   // метод присвоения странице номера из пагинации
   setCurrentPage(page) {
     this.page = page;
