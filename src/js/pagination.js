@@ -106,19 +106,19 @@ export function addPageToArray(currentPage, parsing) {
   let page = currentPage;
 
   const total_results = parsing.length;
-  console.log(parsing.length);
+//   console.log(parsing.length);
 
   let startPage = (page - 1) * notesOnPage;
   let endPage = startPage + notesOnPage;
 
   let results = parsing.slice(startPage, endPage);
   // notes.push(page);
-  console.log(results);
+//   console.log(results);
   const object = {
     page,
     results,
     total_results,
   };
-  console.log(object);
+//   console.log(object);
   return object;
 }
