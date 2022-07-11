@@ -20,8 +20,8 @@ const dotsIcon = `${sprite}#icon-dots`;
 export const paginationSettings = {
   startPage: 1,
   searchType: null,
-  pagination: null,
-  totalItemsHome: null,
+  // pagination: null,
+  // totalItemsHome: null,
 };
 
 // создаем пагинацию

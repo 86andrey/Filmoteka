@@ -17,9 +17,9 @@ import '../js/modalFooter';
 // import Swiper from './modalFooter';
 const goTopBtn = document.querySelector('.back_to_top');
 // console.log(goTopBtn);
+
 window.addEventListener('scroll', throttle(trackScroll, 500));
 const parsing = storage.readItem('watched');
-// console.log(parsing);
 const refs = {
   watchBtn: document.querySelector('#header-watched-button'),
   queueBtn: document.querySelector('#header-queue-button'),
@@ -28,6 +28,7 @@ const modal = document.querySelector('.modal__card-overlay');
 const containerCard = document.querySelector('.container-card');
 const containerPlaceholder = document.querySelector('.container-placeholder');
 
+// =========Открытие модалки==========
 containerCard.addEventListener('click', event => {
   const movieClick = event.path[2];
   if (!movieClick.classList.contains('container-card_single-card')) {
@@ -38,6 +39,7 @@ containerCard.addEventListener('click', event => {
   openModal(movieId);
 });
 
+//============Рендер просмотренного (по дефолту)===============
 renderWatched();
 async function renderWatched() {
   const parsing = storage.readItem('watched');
@@ -55,6 +57,9 @@ async function renderWatched() {
     if (parsingPage.results.length !== 0) {
       containerPlaceholder.classList.add('visually-hidden');
     }
+    if (parsingPage.results.length === 0) {
+      containerPlaceholder.classList.remove('visually-hidden');
+    }
   }
   // const parsingPage = addPageToArray(1, parsing);
   // console.log(parsingPage.results.length);
@@ -64,6 +69,8 @@ async function renderWatched() {
   // }
 }
 
+
+//============Рендер просмотренного (по кнопке в хедере)===============
 refs.watchBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('watched');
   if (parsing) {
@@ -87,11 +94,16 @@ refs.watchBtn.addEventListener('click', async () => {
     if (parsingPage.results.length !== 0) {
       containerPlaceholder.classList.add('visually-hidden');
     }
-  }
+    if (parsingPage.results.length === 0) {
+      containerPlaceholder.classList.remove('visually-hidden');
+    }
+  } 
+ 
 
   onWatchBtnClick();
 });
 
+//============Рендер очереди (по кнопке в хедере)===============
 refs.queueBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('qu');
   if (parsing) {
@@ -100,7 +112,7 @@ refs.queueBtn.addEventListener('click', async () => {
     const parsingPage = addPageToArray(1, parsing);
     // console.log(parsingPage);
     paginationEl.innerHTML = '';
-    containerCard.innerHTML = '';
+    // containerCard.innerHTML = '';
 
     // if (parsing.length === 0) {
     //   // console.log('Нет данных queqeeq');
@@ -121,11 +133,15 @@ refs.queueBtn.addEventListener('click', async () => {
     if (parsingPage.results.length !== 0) {
       containerPlaceholder.classList.add('visually-hidden');
     }
+    if (parsingPage.results.length === 0) {
+      containerPlaceholder.classList.remove('visually-hidden');
+    }
   }
 
   onQueueBtnClick();
 });
 
+//============Смена стилей кнопок в хедере при клике на просмотренные===============
 function onWatchBtnClick() {
   if (refs.watchBtn.classList.contains('is-header-nonactive')) {
     refs.watchBtn.classList.remove('is-header-nonactive');
@@ -137,6 +153,7 @@ function onWatchBtnClick() {
   }
 }
 
+//============Смена стилей кнопок в хедере при клике на очередь===============
 function onQueueBtnClick() {
   if (refs.queueBtn.classList.contains('is-header-nonactive')) {
     refs.queueBtn.classList.remove('is-header-nonactive');

@@ -60,38 +60,38 @@ function makeMarkup(array) {
         genreMain.splice(2, 1, 'Other');
       }    
       if (poster_path === null) {
-        return `
-                  <div class="container-card_single-card" data-id="${id}" >
-                    
-                      <div class="poster">
-                          <img class="poster_img" src="https://img.freepik.com/premium-photo/concept-cinema-accessories-against-dark-wooden-background_185193-61023.jpg?w=740" alt="${original_title}">
-                      </div>
-                      <div class="info">
-                        <h3 class="info_title">${original_title}</h3>
-                        <p class="info_details">
-                            ${genreMain.join(', ')} | ${newReleaseDate}
-                        </p>
-                      </div>
-                    
-                  </div> 
+      return `
+      <div class="container-card_single-card" data-id="${id}" >
+        
+        <div class="poster">
+            <img class="poster_img" loading="lazy" src="https://img.freepik.com/premium-photo/concept-cinema-accessories-against-dark-wooden-background_185193-61023.jpg?w=740" alt="${original_title}">
+        </div>
+        <div class="info">
+          <h3 class="info_title">${original_title}</h3>
+          <p class="info_details">
+              ${genreMain.join(', ')} | ${newReleaseDate}
+          </p>
+        </div>
+      
+      </div> 
         `;
 
          }
       return `
-                  <div class="container-card_single-card" data-id="${id}" >
-                    
-                      <div class="poster">
-                          <img class="poster_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
-                      </div>
-                      <div class="info">
-                        <h3 class="info_title">${original_title}</h3>
-                        <p class="info_details">
-                            ${genreMain.join(', ')} | ${newReleaseDate}
-                        </p>
-                      </div>
-                    
-                  </div> 
-        `;     
+      <div class="container-card_single-card" data-id="${id}" >
+        
+          <div class="poster">
+              <img class="poster_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+          </div>
+          <div class="info">
+            <h3 class="info_title">${original_title}</h3>
+            <p class="info_details">
+                ${genreMain.join(', ')} | ${newReleaseDate}
+            </p>
+          </div>
+        
+      </div> 
+  `;     
     })
     .join('');
 }
@@ -106,17 +106,17 @@ export async function makeMarkupLib(array) {
         allgenres.splice(2, 1, 'Other');
       }
       return `
-                  <div class="container-card_single-card" data-id="${id}" >
-                    <div class="poster">
-                        <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
-                    </div>
-                    <div class="info">
-                      <h3 class="info_title">${original_title}</h3>
-                      <p class="info_details">
-                          ${allgenres.join(', ')} | ${newReleaseDate}
-                      </p>
-                    </div>
-                  </div> 
+      <div class="container-card_single-card" data-id="${id}" >
+        <div class="poster">
+            <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+        </div>
+        <div class="info">
+          <h3 class="info_title">${original_title}</h3>
+          <p class="info_details">
+              ${allgenres.join(', ')} | ${newReleaseDate}
+          </p>
+        </div>
+      </div> 
         `;
     })
     .join('');
@@ -289,6 +289,7 @@ export async function openModal(movieId) {
   });
 }
 
+//===========Рендер модалки===========
 import sprite from '../images/icons.svg';
 const closeIcon = `${sprite}#icon-close`;
 function makeMarkupModal({
