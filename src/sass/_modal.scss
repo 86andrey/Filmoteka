@@ -30,16 +30,23 @@
     top: 50vh;
     left: 50%;
     transform: translate(-50%, -50%);
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         width: 704px;
         height: 552px;
         padding: 40px 72px 40px 36px;
     }
-    @media screen and(max-width:767px) {
+    @media screen and(min-width:480px) and (max-width: 767px) {
         display: block;
-        width: 90vw;
-        height: 80vh;
-        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+        height: 487px;
+        padding: 40px 15px 20px 15px;
+    }
+    @media screen and(max-width:480px) {
+        display: block;
+        width: 268px;
+        height: 487px;
+        padding: 40px 15px 20px 15px;
     }
 }
 
@@ -72,7 +79,7 @@
     width: 375px;
         margin-right: 20px;
         border-radius: 10px;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         margin-right: 40px;
     }
     @media screen and(max-width:767px) {
@@ -88,7 +95,7 @@
     line-height: 35px;
     color: #000000;
     text-transform: uppercase;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         font-size: 20px;
         line-height: 23px;
     }
@@ -99,7 +106,7 @@
 }
 
 .discription__modal {
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         margin-right: 20px;
     }
 }
@@ -130,7 +137,7 @@
 
 .discription__modal-item:nth-child(1)h4{
     margin-right: 85px;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         margin-right: 41px;
     }
     @media screen and(max-width:767px) {
@@ -139,7 +146,7 @@
 }
 .discription__modal-item:nth-child(2)h4{
     margin-right: 97px;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         margin-right: 53px;
     }
     @media screen and(max-width:767px) {
@@ -148,7 +155,7 @@
 }
 .discription__modal-item:nth-child(3)h4{
     margin-right: 83px;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         margin-right: 39px;
     }
     @media screen and(max-width:767px) {
@@ -157,7 +164,7 @@
 }
 .discription__modal-item:nth-child(4)h4{
     margin-right: 120px;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         margin-right: 76px;
     }
     @media screen and(max-width:767px) {
@@ -196,9 +203,9 @@
 
 .about__modal{
     margin-bottom: 20px;
-    overflow-y: auto;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         width: 264px;
+        height: 250px;
     }
     @media screen and(max-width:767px) {
         width: auto;
@@ -225,10 +232,10 @@
     font-size: 12px;
     line-height: 20px;
     color: #000000;
-    
+    overflow-y: auto;
     height: 160px;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
-            height: 260px;
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
+            height: 220px;
         }
     @media screen and(max-width:767px) {
         height: 180px;
@@ -240,12 +247,13 @@
     height: 50px;
     position: absolute;
     bottom: 45px;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         display: flex;
     }
     @media screen and(max-width:767px) {
         display: flex;
         bottom: 13px;
+        left: 12.5px;
     }
 }
 .modal__btn-add{
@@ -259,7 +267,7 @@
     border-radius: 10px;
     text-transform: uppercase;
     transition: transform 0.3s ease-in-out;
-    @media screen and(min-width: 768px) and (max-width: 1023px) {
+    @media screen and(min-width: 768px) and (max-width: 1279px) {
         width: 125px;
     }
     @media screen and(max-width:767px) {
