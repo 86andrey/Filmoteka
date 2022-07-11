@@ -101,7 +101,7 @@ export async function makeMarkupLib(array) {
     .map(({ poster_path, id, original_title, release_date, genres }) => {
       const newReleaseDate = release_date.split('-')[0];
       const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
-      console.log(allgenres);
+//       console.log(allgenres);
       if (allgenres.length === 3) {
         allgenres.splice(2, 1, 'Other');
       }
