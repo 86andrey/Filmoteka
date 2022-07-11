@@ -17,13 +17,13 @@
 
 .wrapper {
     position: fixed;
-
+    z-index: 35;
     top: 0;
     left: 0;
 
     width: 100%;
     height: 100%;
-    background-color: rgba(260, 160, 0, 1);
+    background-color: #330b0b;
 
 }
 
@@ -65,14 +65,14 @@
     font-weight: 400;
     font-style: 14px;
     line-height: 1.17;
-    color: red;
+    color: rgb(255, 255, 255);
     text-align: center;
 }
 
 .image-slider__position {
     margin: 10px;
     text-align: center;
-    color: brown;
+    color: rgb(255, 255, 255);
 }
 
 .image-slider__image img {
