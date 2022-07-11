@@ -10,7 +10,7 @@ import './js/modalFooter';
 //скрипт меняет стили кнопок в хедере
 //import './js/header_styles.js';
 const goTopBtn = document.querySelector('.back_to_top');
-console.log(goTopBtn);
+// console.log(goTopBtn);
 window.addEventListener('scroll', throttle(trackScroll, 500));
 // объявляем экземпляр класса и елементы
 // const movie = new MovieApiService();
@@ -26,7 +26,7 @@ const advertBtnClose = () => {
 };
 advertCloseBtn.addEventListener('click', advertBtnClose);
 setTimeout(
-  () => advertCloseBtn.removeEventListener('click', advertBtnClose),
+  () => {advertCloseBtn.removeEventListener('click', advertBtnClose)},
   5000
 );
 

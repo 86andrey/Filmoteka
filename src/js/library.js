@@ -16,7 +16,7 @@ import { WATCHED_SEARCH_TYPE, QUEUE_SEARCH_TYPE } from './searchTypes';
 import '../js/modalFooter';
 // import Swiper from './modalFooter';
 const goTopBtn = document.querySelector('.back_to_top');
-console.log(goTopBtn);
+// console.log(goTopBtn);
 window.addEventListener('scroll', throttle(trackScroll, 500));
 const parsing = storage.readItem('watched');
 // console.log(parsing);
