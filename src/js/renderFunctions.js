@@ -4,7 +4,7 @@ import { storage } from './storage';
 const movie = new MovieApiService();
 
 const containerCard = document.querySelector('.container-card');
-const containerModal = document.querySelector('.modal__card-content');
+// const containerModal = document.querySelector('.modal__card-content');
 const errorMessage = document.querySelector('.header-error-container');
 
 // Функция для отображения карточек
@@ -58,9 +58,9 @@ function makeMarkup(array) {
       // console.log(genreMain.length);
       if (genreMain.length === 3) {
         genreMain.splice(2, 1, 'Other');
-      }    
+      }
       if (poster_path === null) {
-      return `
+        return `
       <div class="container-card_single-card" data-id="${id}" >
         
         <div class="poster">
@@ -75,8 +75,7 @@ function makeMarkup(array) {
       
       </div> 
         `;
-
-         }
+      }
       return `
       <div class="container-card_single-card" data-id="${id}" >
         
@@ -91,7 +90,7 @@ function makeMarkup(array) {
           </div>
         
       </div> 
-  `;     
+  `;
     })
     .join('');
 }
@@ -101,7 +100,7 @@ export async function makeMarkupLib(array) {
     .map(({ poster_path, id, original_title, release_date, genres }) => {
       const newReleaseDate = release_date.split('-')[0];
       const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
-//       console.log(allgenres);
+      //       console.log(allgenres);
       if (allgenres.length === 3) {
         allgenres.splice(2, 1, 'Other');
       }
@@ -123,10 +122,11 @@ export async function makeMarkupLib(array) {
 }
 
 export async function openModal(movieId) {
+  const containerModal = document.querySelector('.modal__card-content');
   const data = await movie.fetchById(movieId);
-  // console.log(array);
+  // console.log(data);
   containerModal.innerHTML = await makeMarkupModal(data);
-
+  // console.log(data);
   const modalCloseBtn = document.querySelector('.modal__close');
   const modal = document.querySelector('.modal__card-overlay');
 
@@ -167,7 +167,7 @@ export async function openModal(movieId) {
 
   saveQueueBtn();
   async function saveQueueBtn() {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const parsing = storage.readItem('qu');
     if (parsing) {
       const movieTitle = data.title;
@@ -185,7 +185,7 @@ export async function openModal(movieId) {
   }
   saveWatchedBtn();
   async function saveWatchedBtn() {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const parsing = storage.readItem('watched');
     if (parsing) {
       const movieTitle = data.title;
@@ -204,7 +204,7 @@ export async function openModal(movieId) {
   // ФУНКЦИИ ДОБАВЛЕНИЯ И ПЕРЕЗАПИСИ В LOCALSTORAGE
 
   addToWatched.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const result = storage.readItem('watched', []);
     const parsing = storage.readItem('qu');
     if (parsing) {
@@ -232,7 +232,7 @@ export async function openModal(movieId) {
   });
 
   addToQueue.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const result = storage.readItem('qu', []);
     const parsing = storage.readItem('watched');
     if (parsing) {
