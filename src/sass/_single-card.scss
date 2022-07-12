@@ -1,21 +1,26 @@
 
 .container-card {
 //     background-color: $body-container-background;
-        padding-top: 20px;
+        // margin-top: 20px;
+        outline: red solid 1px;
+        padding: 20px 20px 0px 20px;
             
         @media screen and (min-width: 768px) {
+            padding: 60px 16px 60px 16px;
                 display: flex;
                 flex-wrap: wrap;
-                margin-left: -32px;
-                margin-bottom: -32px;
+                justify-content: start;
+                // margin-left: -32px;
+                // margin-bottom: -32px;
                 // padding-top: 60px;
                   
         }
     
         @media screen and (min-width: 1280px) {
-            padding-top: 60px;
-            margin-left: -32px;
-            margin-bottom: -32px;
+            padding: 60px 24px 0 24px;
+            // padding-top: 60px;
+            // margin-left: -32px;
+            // margin-bottom: -32px;
             
 }
 }
@@ -23,68 +28,80 @@
 
 .container-card_single-card {
     //>>>>>>>збільшення масштабу img>>>>
-            margin-left: 0;
-            margin-top: 20px;
+            // margin-left: 0;
+            // margin-top: 20px;
             margin-bottom: 20px;
+            // margin: 32px 16px 32px 16px;
             transition: transform 500ms;
             max-width: 280px;
             
     
-            &:hover {
-                transform: scale(1.05);
-                border-radius: 1px;
-            }
+            // &:hover {
+            //     transform: scale(1.05);
+            //     border-radius: 1px;
+            // }
         //<<<<<<<збільшення масштабу img<<<<<
     @media screen and (min-width: 768px) {
             flex-basis: calc(100% / 2 - 32px);
             max-width: 336px;
-            margin-left: 32px;
-            margin-bottom: 32px;
+            margin: 16px 16px 16px 16px;
+            // margin-left: 32px;
+            // margin-bottom: 32px;
         }
     
         @media screen and (min-width: 1280px) {
             flex-basis: calc(100% / 3 - 16px);
             max-width: 395px;
-            margin-left: 16px;
-            margin-bottom: 32px;
+            margin: 16px 8px 16px 8px;
+            // margin-left: 16px;
+            // margin-bottom: 32px;
         }
 
+        &:hover {
+            transform: scale(1.05);
+            border-radius: 2px;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+                    1px 4px 6px rgba(0, 0, 0, 0.16);
+        }
+    
 }
 
-//>>>>>>>збільшення масштабу img>>>>
-.container-card_single-card {
-    // width: 100%;
-    // height: 100%;
-    transition: transform 500ms;
+// //>>>>>>>збільшення масштабу img>>>>
+// .container-card_single-card {
+//     // width: 100%;
+//     // height: 100%;
+//     transition: transform 500ms;
 
-    &:hover {
-        transform: scale(1.05);
-        border-radius: 1px;
-        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-                1px 4px 6px rgba(0, 0, 0, 0.16);
-    }
-}
-//<<<<<<<збільшення масштабу img<<<<<
+//     &:hover {
+//         transform: scale(1.05);
+//         border-radius: 1px;
+//         box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+//                 1px 4px 6px rgba(0, 0, 0, 0.16);
+//     }
+// }
+// //<<<<<<<збільшення масштабу img<<<<<
 
 .poster{
     margin-bottom: 10px;
+    height: 398px;
 
     @media screen and (min-width: 768px) {
             margin-bottom: 8px;
-            
-    
+            height: 455px;
+                
         }
     
         @media screen and (min-width: 1280px) {
             margin-bottom: 12px;
-           
-            
+            height: 574px;
+                       
         }
 }
 
 .poster_img{
         border-radius: 5px;
         width: 280px;
+        height: 100%;
             @media screen and (min-width: 768px) {
                 width: 100%;
                 // max-width: 336px;
