@@ -1,6 +1,8 @@
 
 .container-card {
-//     background-color: $body-container-background;
+//     background-color: $body-container-background;      
+            
+
         // margin-top: 20px;
         
         padding: 20px 20px 0px 20px;
@@ -8,6 +10,7 @@
         @media screen and (max-width: 290px) {
                 padding: 20px 5px 0px;
             }
+
 
         @media screen and (min-width: 768px) {
             padding: 60px 16px 60px 16px;
