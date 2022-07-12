@@ -81,7 +81,7 @@ function makeMarkup(array) {
       <div class="container-card_single-card" data-id="${id}" >
         
           <div class="poster">
-              <img class="poster_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+              <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
           </div>
           <div class="info">
             <h3 class="info_title">${original_title}</h3>
@@ -108,7 +108,7 @@ export async function makeMarkupLib(array) {
       return `
       <div class="container-card_single-card" data-id="${id}" >
         <div class="poster">
-            <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+            <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
         </div>
         <div class="info">
           <h3 class="info_title">${original_title}</h3>
