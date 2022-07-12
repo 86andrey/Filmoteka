@@ -1,10 +1,17 @@
 
 .container-card {
-//     background-color: $body-container-background;
+//     background-color: $body-container-background;      
+            
+
         // margin-top: 20px;
         
         padding: 20px 20px 0px 20px;
-            
+
+        @media screen and (max-width: 290px) {
+                padding: 20px 5px 0px;
+            }
+
+
         @media screen and (min-width: 768px) {
             padding: 60px 16px 60px 16px;
                 display: flex;
@@ -84,7 +91,8 @@
 .poster{
     margin-bottom: 10px;
     height: 398px;
-
+    max-width: 100%;
+    width: 100%;
     @media screen and (min-width: 768px) {
             margin-bottom: 8px;
             height: 455px;
@@ -100,7 +108,7 @@
 
 .poster_img{
         border-radius: 5px;
-        width: 280px;
+        // width: 280px;
         height: 100%;
             @media screen and (min-width: 768px) {
                 width: 100%;
@@ -141,7 +149,10 @@
 
 // стиль контейнера с заглушкой
 .container-placeholder{
-    margin-top: 20px;
+    padding-top: 20px;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
     // background-image: url('../images/avengers_min.jpg');
     // background-repeat: no-repeat;
     // background-position: center;
@@ -151,4 +162,7 @@
     // // max-width: 100%;
     // // min-height: 100%;
     // opacity: 0.5;
+}
+.placeholder-image{
+    width: 100%;
 }

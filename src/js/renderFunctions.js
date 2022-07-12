@@ -1,10 +1,12 @@
 import MovieApiService from './movieFetch';
 import { storage } from './storage';
+import { updateQueue } from './updateLib';
+import { updateWatched } from './updateLib';
 
 const movie = new MovieApiService();
 
 const containerCard = document.querySelector('.container-card');
-const containerModal = document.querySelector('.modal__card-content');
+// const containerModal = document.querySelector('.modal__card-content');
 const errorMessage = document.querySelector('.header-error-container');
 
 // Функция для отображения карточек
@@ -58,9 +60,9 @@ function makeMarkup(array) {
       // console.log(genreMain.length);
       if (genreMain.length === 3) {
         genreMain.splice(2, 1, 'Other');
-      }    
+      }
       if (poster_path === null) {
-      return `
+        return `
       <div class="container-card_single-card" data-id="${id}" >
         
         <div class="poster">
@@ -75,13 +77,12 @@ function makeMarkup(array) {
       
       </div> 
         `;
-
-         }
+      }
       return `
       <div class="container-card_single-card" data-id="${id}" >
         
           <div class="poster">
-              <img class="poster_img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+              <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
           </div>
           <div class="info">
             <h3 class="info_title">${original_title}</h3>
@@ -91,7 +92,7 @@ function makeMarkup(array) {
           </div>
         
       </div> 
-  `;     
+  `;
     })
     .join('');
 }
@@ -101,14 +102,14 @@ export async function makeMarkupLib(array) {
     .map(({ poster_path, id, original_title, release_date, genres }) => {
       const newReleaseDate = release_date.split('-')[0];
       const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
-//       console.log(allgenres);
+      //       console.log(allgenres);
       if (allgenres.length === 3) {
         allgenres.splice(2, 1, 'Other');
       }
       return `
       <div class="container-card_single-card" data-id="${id}" >
         <div class="poster">
-            <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+            <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
         </div>
         <div class="info">
           <h3 class="info_title">${original_title}</h3>
@@ -123,10 +124,11 @@ export async function makeMarkupLib(array) {
 }
 
 export async function openModal(movieId) {
+  const containerModal = document.querySelector('.modal__card-content');
   const data = await movie.fetchById(movieId);
-  // console.log(array);
+  // console.log(data);
   containerModal.innerHTML = await makeMarkupModal(data);
-
+  // console.log(data);
   const modalCloseBtn = document.querySelector('.modal__close');
   const modal = document.querySelector('.modal__card-overlay');
 
@@ -167,7 +169,7 @@ export async function openModal(movieId) {
 
   saveQueueBtn();
   async function saveQueueBtn() {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const parsing = storage.readItem('qu');
     if (parsing) {
       const movieTitle = data.title;
@@ -185,7 +187,7 @@ export async function openModal(movieId) {
   }
   saveWatchedBtn();
   async function saveWatchedBtn() {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const parsing = storage.readItem('watched');
     if (parsing) {
       const movieTitle = data.title;
@@ -204,7 +206,7 @@ export async function openModal(movieId) {
   // ФУНКЦИИ ДОБАВЛЕНИЯ И ПЕРЕЗАПИСИ В LOCALSTORAGE
 
   addToWatched.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const result = storage.readItem('watched', []);
     const parsing = storage.readItem('qu');
     if (parsing) {
@@ -215,6 +217,7 @@ export async function openModal(movieId) {
       if (checkMovie >= 0) {
         const removMovie = parsing.splice(checkMovie, 1);
         storage.addItem('qu', parsing);
+        updateQueue()
         result.push(data);
         storage.addItem('watched', result);
       } else if (checkMovie === -1) {
@@ -232,7 +235,7 @@ export async function openModal(movieId) {
   });
 
   addToQueue.addEventListener('click', async () => {
-    const data = await movie.fetchById(movieId);
+    // const data = await movie.fetchById(movieId);
     const result = storage.readItem('qu', []);
     const parsing = storage.readItem('watched');
     if (parsing) {
@@ -243,6 +246,7 @@ export async function openModal(movieId) {
       if (checkMovie >= 0) {
         const removMovie = parsing.splice(checkMovie, 1);
         storage.addItem('watched', parsing);
+        updateWatched()
         result.push(data);
         storage.addItem('qu', result);
       } else if (checkMovie === -1) {
@@ -269,6 +273,7 @@ export async function openModal(movieId) {
     } else {
       const removMovie = parsing.splice(checkMovie, 1);
       storage.addItem('watched', parsing);
+      updateWatched()
     }
     removeFromWatched.classList.add('hide-btn');
     addToWatched.classList.remove('hide-btn');
@@ -283,6 +288,7 @@ export async function openModal(movieId) {
     } else {
       const removMovie = parsing.splice(checkMovie, 1);
       storage.addItem('qu', parsing);
+      updateQueue()
     }
     removeFromQueue.classList.add('hide-btn');
     addToQueue.classList.remove('hide-btn');

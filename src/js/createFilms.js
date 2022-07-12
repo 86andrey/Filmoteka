@@ -2,6 +2,7 @@ import MovieApiService from './movieFetch';
 import { renderMarkup, showRequestError } from './renderFunctions';
 import { createPagination, paginationSettings } from './pagination';
 import { HOME_SEARCH_TYPE, QUERY_SEARCH_TYPE } from './searchTypes';
+import { input } from '../index';
 
 const movie = new MovieApiService();
 
