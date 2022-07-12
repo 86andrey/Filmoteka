@@ -1,5 +1,7 @@
 import MovieApiService from './movieFetch';
 import { storage } from './storage';
+import { updateQueue } from './updateLib';
+import { updateWatched } from './updateLib';
 
 const movie = new MovieApiService();
 
@@ -215,6 +217,7 @@ export async function openModal(movieId) {
       if (checkMovie >= 0) {
         const removMovie = parsing.splice(checkMovie, 1);
         storage.addItem('qu', parsing);
+        updateQueue()
         result.push(data);
         storage.addItem('watched', result);
       } else if (checkMovie === -1) {
@@ -243,6 +246,7 @@ export async function openModal(movieId) {
       if (checkMovie >= 0) {
         const removMovie = parsing.splice(checkMovie, 1);
         storage.addItem('watched', parsing);
+        updateWatched()
         result.push(data);
         storage.addItem('qu', result);
       } else if (checkMovie === -1) {
@@ -269,6 +273,7 @@ export async function openModal(movieId) {
     } else {
       const removMovie = parsing.splice(checkMovie, 1);
       storage.addItem('watched', parsing);
+      updateWatched()
     }
     removeFromWatched.classList.add('hide-btn');
     addToWatched.classList.remove('hide-btn');
@@ -283,6 +288,7 @@ export async function openModal(movieId) {
     } else {
       const removMovie = parsing.splice(checkMovie, 1);
       storage.addItem('qu', parsing);
+      updateQueue()
     }
     removeFromQueue.classList.add('hide-btn');
     addToQueue.classList.remove('hide-btn');
