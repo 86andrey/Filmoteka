@@ -25,10 +25,9 @@ const advertBtnClose = () => {
   advertContainer.classList.add('is-hidden');
 };
 advertCloseBtn.addEventListener('click', advertBtnClose);
-setTimeout(
-  () => {advertCloseBtn.removeEventListener('click', advertBtnClose)},
-  5000
-);
+setTimeout(() => {
+  advertCloseBtn.removeEventListener('click', advertBtnClose);
+}, 5000);
 
 //функция поиска по запросу
 form.addEventListener('submit', onBtnSearch);
@@ -39,8 +38,8 @@ function onBtnSearch(evt) {
     const searchQuery = evt.target[0].value;
     if (searchQuery === '') {
       // console.log('надо ввести фильм');
-    }
-    if (searchQuery === evt.target[0].value) {
+      return;
+    } else if (searchQuery === evt.target[0].value) {
       createFilmsBySearch(searchQuery);
     }
   } catch {
