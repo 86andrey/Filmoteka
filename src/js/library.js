@@ -45,8 +45,9 @@ async function renderWatched() {
   const parsing = storage.readItem('watched');
   if (parsing) {
     const parsingPage = addPageToArray(1, parsing);
+    console.log(parsingPage);
     if (parsingPage.total_results > 20) {
-      // console.log(createPagination(parsingPage));
+      createPagination(parsingPage);
 
       paginationSettings.searchType = WATCHED_SEARCH_TYPE;
     }
@@ -61,14 +62,7 @@ async function renderWatched() {
       containerPlaceholder.classList.remove('visually-hidden');
     }
   }
-  // const parsingPage = addPageToArray(1, parsing);
-  // console.log(parsingPage.results.length);
-  // if (parsingPage.results.length === 0) {
-  //   // console.log('Нет данных');
-  //   containerPlaceholder.classList.remove('visually-hidden');
-  // }
 }
-
 
 //============Рендер просмотренного (по кнопке в хедере)===============
 refs.watchBtn.addEventListener('click', async () => {
@@ -76,19 +70,12 @@ refs.watchBtn.addEventListener('click', async () => {
   if (parsing) {
     const parsingPage = addPageToArray(1, parsing);
 
-    // console.log(parsingPage.results);
-    // if (parsing.length === 0) {
-    //   // console.log('Нет данных watchbtn');
-    //   containerCard.innerHTML = '';
-    //   containerPlaceholder.classList.remove('visually-hidden');
-    // }
     if (parsingPage.total_results > 20) {
-      // console.log(createPagination(parsingPage));
+      createPagination(parsingPage);
 
       paginationSettings.searchType = WATCHED_SEARCH_TYPE;
     }
     if (parsingPage.results.length < 21) {
-      // containerCard.innerHTML = '';
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
     }
     if (parsingPage.results.length !== 0) {
@@ -97,8 +84,7 @@ refs.watchBtn.addEventListener('click', async () => {
     if (parsingPage.results.length === 0) {
       containerPlaceholder.classList.remove('visually-hidden');
     }
-  } 
- 
+  }
 
   onWatchBtnClick();
 });
@@ -108,28 +94,18 @@ refs.queueBtn.addEventListener('click', async () => {
   const parsing = storage.readItem('qu');
   if (parsing) {
     const paginationEl = document.querySelector('#tui-pagination-container');
-    // console.log(parsing);
     const parsingPage = addPageToArray(1, parsing);
-    // console.log(parsingPage);
     paginationEl.innerHTML = '';
-    // containerCard.innerHTML = '';
 
-    // if (parsing.length === 0) {
-    //   // console.log('Нет данных queqeeq');
-    //   containerCard.innerHTML = '';
-    //   containerPlaceholder.classList.remove('visually-hidden');
-    // }
     if (parsingPage.total_results > 20) {
-      // console.log('Пагинация By Queue');
-      // console.log(createPagination(parsingPage));
-
+      createPagination(parsingPage);
       paginationSettings.searchType = QUEUE_SEARCH_TYPE;
     }
 
     if (parsingPage.results.length < 21) {
-      // containerCard.innerHTML = '';
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
     }
+
     if (parsingPage.results.length !== 0) {
       containerPlaceholder.classList.add('visually-hidden');
     }
