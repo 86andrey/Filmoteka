@@ -8,13 +8,13 @@ const swiper = new Swiper('.image-slider', {
   pagination: {
     el: '.swiper-pagination',
     type: 'bullets',
-    //   renderFraction: function (currentClass, totalClass) {
-    //       return 'Фото <span class="' + currentClass + '"></span>' +
-    //           ' из '
-    //           + '<span class="' + totalClass + '"></span>';
-    //   }
+   //    renderFraction: function (currentClass, totalClass) {
+   //        return 'Фото <span class="' + currentClass + '"></span>' +
+   //            ' из '
+   //            + '<span class="' + totalClass + '"></span>';
+   //    }
   },
-  //  scroll
+    //scroll
 
   scrollbar: {
     el: '.swiper-scrollbar',
@@ -41,7 +41,7 @@ const swiper = new Swiper('.image-slider', {
 
   autoHeight: true,
 
-  slidesPerView: 1,
+  slidesPerView: 2,
 
   slidesPerGroup: 1,
 
@@ -68,7 +68,7 @@ const swiper = new Swiper('.image-slider', {
   //       limitRotation: true
   //   },
 
-  // effect: 'cube',
+ //  effect: 'cube',
 
   //   cubeEffect: {
   //       slideShadows: true,
@@ -101,16 +101,21 @@ const swiper = new Swiper('.image-slider', {
   breakpoints: {
     320: {
       slidesPerView: 1,
+      
     },
     768: {
       slidesPerView: 2,
+      
     },
     992: {
       slidesPerView: 3,
+      
+      
     },
   },
 
   preloadImages: false,
+  lazy: true,
 
   lazy: {
     loadOnTransitionStart: false,
