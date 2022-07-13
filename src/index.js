@@ -13,10 +13,12 @@ const goTopBtn = document.querySelector('.back_to_top');
 // console.log(goTopBtn);
 window.addEventListener('scroll', throttle(trackScroll, 500));
 // объявляем экземпляр класса и елементы
-// const movie = new MovieApiService();
 export const form = document.querySelector('.header-input-container');
 export const input = document.querySelector('#search-box');
 const paginationEl = document.querySelector('#tui-pagination-container');
+// export const optionBySearch = {
+//   searchType: null,
+// };
 
 //всплывающий репета
 const advertCloseBtn = document.querySelector('.advert__button-close');
@@ -35,15 +37,16 @@ form.addEventListener('submit', onBtnSearch);
 function onBtnSearch(evt) {
   try {
     evt.preventDefault();
+    // const movies = await movie.fetchPopular();
     const searchQuery = evt.target[0].value;
-    if (searchQuery === '') {
+    if (searchQuery.trim() === '') {
       showRequestError();
       return;
     } else if (searchQuery === evt.target[0].value) {
-      createFilmsBySearch(searchQuery);
+      createFilmsBySearch(searchQuery.trim());
     }
-  } catch {
-    error => console.log(error);
+  } catch (error) {
+    console.log(error);
   }
 }
 

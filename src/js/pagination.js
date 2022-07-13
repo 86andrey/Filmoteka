@@ -66,19 +66,18 @@ export function createPagination({ page, total_results }) {
     const parsing = storage.readItem('watched');
     const parsingByQ = storage.readItem('qu');
     const containerCard = document.querySelector('.container-card');
- 
+
     if (paginationSettings.searchType === HOME_SEARCH_TYPE) {
       const moviesPopular = await movie.fetchPopularPagination(currentPage);
       const data = await moviesPopular;
       renderMarkup(data);
-
     } else if (paginationSettings.searchType === QUERY_SEARCH_TYPE) {
       const moviesByQ = await movie.fetchByQueryPagination(
         input.value,
         currentPage
       );
       const data = await moviesByQ;
-      console.log(data);
+      // console.log(data);
       renderMarkup(data);
     }
 
