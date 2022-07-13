@@ -61,33 +61,25 @@ function makeMarkup(array) {
       if (genreMain.length === 3) {
         genreMain.splice(2, 1, 'Other');
       }
-      if (poster_path === null) {
-        return `
-      <div class="container-card_single-card" data-id="${id}" >
-        
-        <div class="poster">
-            <img class="poster_img" loading="lazy" src="https://img.freepik.com/premium-photo/concept-cinema-accessories-against-dark-wooden-background_185193-61023.jpg?w=740" alt="${original_title}">
-        </div>
-        <div class="info">
-          <h3 class="info_title">${original_title}</h3>
-          <p class="info_details">
-              ${genreMain.join(', ')} | ${newReleaseDate}
-          </p>
-        </div>
       
-      </div> 
-        `;
+      let newGenreMain = genreMain.join(', ')
+      if (genreMain.length === 0) {
+          newGenreMain = `NO GENRE`
+      }
+      let posterImageUrl = `https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}`
+      if (poster_path === null) {
+            posterImageUrl = `https://img.freepik.com/premium-photo/concept-cinema-accessories-against-dark-wooden-background_185193-61023.jpg?w=740" alt="${original_title}`
       }
       return `
       <div class="container-card_single-card" data-id="${id}" >
         
           <div class="poster">
-              <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
+              <img class="poster_img" loading="lazy" src="${posterImageUrl}">
           </div>
           <div class="info">
             <h3 class="info_title">${original_title}</h3>
             <p class="info_details">
-                ${genreMain.join(', ')} | ${newReleaseDate}
+                ${newGenreMain} | ${newReleaseDate}
             </p>
           </div>
         
