@@ -4,8 +4,7 @@ import throttle from 'lodash.throttle';
 
 import { makeMarkupLib } from './renderFunctions';
 import { openModal } from './renderFunctions';
-import { WhiteColor } from "./renderFunctions"
-import { BlackColor } from "./renderFunctions"
+
 // import './btm-to-top';
 import {
   createPagination,
@@ -49,25 +48,17 @@ async function renderWatched() {
     const parsingPage = addPageToArray(1, parsing);
     console.log(parsingPage);
     if (parsingPage.total_results > 20) {
-      createPagination(parsingPage);
-
+      createPagination(parsingPage)
       paginationSettings.searchType = WATCHED_SEARCH_TYPE;
     }
-
     if (parsingPage.results.length < 21) {
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
-         const darkTheme = localStorage.getItem("theme")
-  if (darkTheme) {
-            WhiteColor()
-  } else {
-    BlackColor()
-        }
-    }
-    if (parsingPage.results.length !== 0) {
-      containerPlaceholder.classList.add('visually-hidden');
-    }
-    if (parsingPage.results.length === 0) {
-      containerPlaceholder.classList.remove('visually-hidden');
+      if (parsingPage.results.length !== 0) {
+        containerPlaceholder.classList.add('visually-hidden');
+      }
+      if (parsingPage.results.length === 0) {
+        containerPlaceholder.classList.remove('visually-hidden');
+      }
     }
   }
 }
@@ -85,12 +76,6 @@ refs.watchBtn.addEventListener('click', async () => {
     }
     if (parsingPage.results.length < 21) {
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
-        const darkTheme = localStorage.getItem("theme")
-  if (darkTheme) {
-            WhiteColor()
-  } else {
-    BlackColor()
-        }
     }
     if (parsingPage.results.length !== 0) {
       containerPlaceholder.classList.add('visually-hidden');
@@ -118,12 +103,7 @@ refs.queueBtn.addEventListener('click', async () => {
 
     if (parsingPage.results.length < 21) {
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
-        const darkTheme = localStorage.getItem("theme")
-  if (darkTheme) {
-            WhiteColor()
-  } else {
-    BlackColor()
-        }
+
     }
 
     if (parsingPage.results.length !== 0) {
