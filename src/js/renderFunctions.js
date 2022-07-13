@@ -13,6 +13,12 @@ const errorMessage = document.querySelector('.header-error-container');
 export async function renderMarkup(movies) {
   // console.log(movies);
   containerCard.innerHTML = await makeMarkup(movies.results);
+  const darkTheme = localStorage.getItem("theme")
+  if (darkTheme) {
+            WhiteColor()
+  } else {
+    BlackColor()
+        }
 }
 
 // export async function renderMarkupByQ(searchQuery) {
@@ -85,7 +91,7 @@ function makeMarkup(array) {
               <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
           </div>
           <div class="info">
-            <h3 class="info_title">${original_title}</h3>
+            <h3 class="info_title title">${original_title}</h3>
             <p class="info_details">
                 ${genreMain.join(', ')} | ${newReleaseDate}
             </p>
@@ -95,6 +101,21 @@ function makeMarkup(array) {
   `;
     })
     .join('');
+}
+
+export function WhiteColor() {
+  const titles = document.querySelectorAll(".title")
+  for (title of titles) {
+    title.classList.add("title_white")
+     title.classList.remove("info_title")
+  }
+}
+export function BlackColor() {
+  const titles = document.querySelectorAll(".title")
+  for (title of titles) {
+    title.classList.remove("title_white")
+     title.classList.add("info_title")
+  }
 }
 
 export async function makeMarkupLib(array) {
@@ -112,7 +133,7 @@ export async function makeMarkupLib(array) {
             <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
         </div>
         <div class="info">
-          <h3 class="info_title">${original_title}</h3>
+          <h3 class="info_title title">${original_title}</h3>
           <p class="info_details">
               ${allgenres.join(', ')} | ${newReleaseDate}
           </p>
