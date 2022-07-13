@@ -304,13 +304,26 @@ function makeMarkupModal({
   const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
   // console.log(allgenres)
   allgenres.slice(0, 3);
+  let newGenreModal = allgenres.join(', ') 
+  if (newGenreModal.length === 0) { 
+    newGenreModal = "no genres"
+  } 
+  let modalPosterUrl = `https://image.tmdb.org/t/p/w500${poster_path}`
+  if (poster_path === null) { 
+    modalPosterUrl = 'https://img.freepik.com/premium-photo/concept-cinema-accessories-against-dark-wooden-background_185193-61023.jpg?w=740"'
+  }
+  let modalAboutText = `${overview}`
+  console.log(modalAboutText);
+  if (modalAboutText.length === 0) { 
+    modalAboutText = "Unfortunately we don't have a description for this movie :("
+  }
   return `
     <button type="button" class="modal__close" data-modal-close>
-    <svg width="12" height="12" class="modal-close-btn__icon">
-    <use href="${closeIcon}"></use>
-</svg>
+      <svg width="12" height="12" class="modal-close-btn__icon">
+        <use href="${closeIcon}"></use>
+      </svg>
     </button>
-  <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}" class="modal__img" />
+  <img src=${modalPosterUrl} alt="${original_title}" class="modal__img" />
   <div class="modal__info">
     <h2 class="modal__info-title">${original_title}</h2>
     <div class="modal__info-block">
@@ -333,13 +346,13 @@ function makeMarkupModal({
         </li>
         <li class="discription__modal-item">
           <h4 class="discription__modal-title">Genre</h4>
-          <p class="discription__modal-text">${allgenres.join(', ')}</p>
+          <p class="discription__modal-text">${newGenreModal}</p>
         </li>
       </ul>
     </div>
     <div class="modal__info about__modal">
       <h4 class="about__modal-title">About</h4>
-      <p class="about__modal-text">${overview}</p>
+      <p class="about__modal-text">${modalAboutText}</p>
     </div>
     <div class="modal__button">
       <button type="button" class="modal__btn-add modal__btn-1add">add to Watched</button>
