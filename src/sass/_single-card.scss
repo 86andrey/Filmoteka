@@ -166,3 +166,10 @@
 .placeholder-image{
     width: 100%;
 }
+.title_white {
+    color: $primary-white-color;
+
+    &:hover {
+        color: rgb(246, 21, 160);
+    }
+}

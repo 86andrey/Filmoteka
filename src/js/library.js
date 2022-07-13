@@ -4,6 +4,8 @@ import throttle from 'lodash.throttle';
 
 import { makeMarkupLib } from './renderFunctions';
 import { openModal } from './renderFunctions';
+import { WhiteColor } from "./renderFunctions"
+import { BlackColor } from "./renderFunctions"
 // import './btm-to-top';
 import {
   createPagination,
@@ -54,6 +56,12 @@ async function renderWatched() {
 
     if (parsingPage.results.length < 21) {
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+         const darkTheme = localStorage.getItem("theme")
+  if (darkTheme) {
+            WhiteColor()
+  } else {
+    BlackColor()
+        }
     }
     if (parsingPage.results.length !== 0) {
       containerPlaceholder.classList.add('visually-hidden');
@@ -77,6 +85,12 @@ refs.watchBtn.addEventListener('click', async () => {
     }
     if (parsingPage.results.length < 21) {
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+        const darkTheme = localStorage.getItem("theme")
+  if (darkTheme) {
+            WhiteColor()
+  } else {
+    BlackColor()
+        }
     }
     if (parsingPage.results.length !== 0) {
       containerPlaceholder.classList.add('visually-hidden');
@@ -104,6 +118,12 @@ refs.queueBtn.addEventListener('click', async () => {
 
     if (parsingPage.results.length < 21) {
       containerCard.innerHTML = await makeMarkupLib(parsingPage.results);
+        const darkTheme = localStorage.getItem("theme")
+  if (darkTheme) {
+            WhiteColor()
+  } else {
+    BlackColor()
+        }
     }
 
     if (parsingPage.results.length !== 0) {
