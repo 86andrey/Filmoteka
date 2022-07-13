@@ -223,6 +223,7 @@ export async function openModal(movieId) {
       } else if (checkMovie === -1) {
         result.push(data);
         storage.addItem('watched', result);
+        updateWatched()
       }
     } else {
       result.push(data);
@@ -252,6 +253,7 @@ export async function openModal(movieId) {
       } else if (checkMovie === -1) {
         result.push(data);
         storage.addItem('qu', result);
+        updateQueue()
       }
     } else {
       result.push(data);
