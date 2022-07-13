@@ -63,19 +63,15 @@ export function createPagination({ page, total_results }) {
       behavior: 'smooth',
     });
     const currentPage = event.page;
-    // const searchQuery = input.value;
     const parsing = storage.readItem('watched');
     const parsingByQ = storage.readItem('qu');
     const containerCard = document.querySelector('.container-card');
-    // console.log(searchQuery);
-    // addPageToArray(currentPage, parsing);
+ 
     if (paginationSettings.searchType === HOME_SEARCH_TYPE) {
       const moviesPopular = await movie.fetchPopularPagination(currentPage);
       const data = await moviesPopular;
-      console.log(data);
       renderMarkup(data);
 
-      // console.log(form);
     } else if (paginationSettings.searchType === QUERY_SEARCH_TYPE) {
       const moviesByQ = await movie.fetchByQueryPagination(
         input.value,
@@ -106,19 +102,15 @@ export function addPageToArray(currentPage, parsing) {
   let page = currentPage;
 
   const total_results = parsing.length;
-//   console.log(parsing.length);
 
   let startPage = (page - 1) * notesOnPage;
   let endPage = startPage + notesOnPage;
-
   let results = parsing.slice(startPage, endPage);
-  // notes.push(page);
-//   console.log(results);
+
   const object = {
     page,
     results,
     total_results,
   };
-//   console.log(object);
   return object;
 }
