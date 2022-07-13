@@ -308,46 +308,4 @@
     pointer-events: none;
     visibility: hidden;
 }
-.light-theme {
-    background-color: $body-container-background;
-}
-
-.dark-theme {
-    background-image: url("../images/dark-background-min.jpg");
-
-}
-
-.theme-btn {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 32px;
-}
-
-.light {
-    border: none;
-    background-color: transparent;
-}
-
-.dark {
-    border: none;
-    background-color: transparent;
-}
-
-.icon-sun {
-    fill: $primary-white-color;
-
-    &:hover,
-    &:focus {
-        fill: $header-button-color
-    }
-}
-
-.icon-night {
-    fill: $primary-white-color;
-
-    &:hover,
-    &:focus {
-        fill: $header-button-color
-    }
-}
 
