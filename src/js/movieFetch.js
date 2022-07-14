@@ -47,13 +47,14 @@ export default class MovieApiService {
     const spinner = new Spinner(opts).spin(target);
     try {
       const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false`;
+      mainContainerPlaceholder.classList.add('visually-hidden');
       const response = await fetch(url);
-      mainContainerPlaceholder.classList.remove('visually-hidden');
+      // mainContainerPlaceholder.classList.add('visually-hidden');
       const data = await response.json();
       if (data.results.length === 0){
         const containerCard = document.querySelector('.container-card');
         containerCard.innerHTML='';
-        console.log("поймали", mainContainerPlaceholder);
+        // console.log("поймали", mainContainerPlaceholder);
         mainContainerPlaceholder.classList.remove('visually-hidden');
 
        
