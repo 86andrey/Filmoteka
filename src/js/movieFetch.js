@@ -42,13 +42,24 @@ export default class MovieApiService {
 
   // метод получения массива фильмов по запросу.
   async fetchByQuery(searchQuery) {
+    const mainContainerPlaceholder = document.querySelector('.container-empty');
     const target = document.querySelector('.container-card');
     const spinner = new Spinner(opts).spin(target);
     try {
       const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&include_adult=false`;
       const response = await fetch(url);
-
+      mainContainerPlaceholder.classList.remove('visually-hidden');
       const data = await response.json();
+      if (data.results.length === 0){
+        const containerCard = document.querySelector('.container-card');
+        containerCard.innerHTML='';
+        console.log("поймали", mainContainerPlaceholder);
+        mainContainerPlaceholder.classList.remove('visually-hidden');
+
+       
+
+
+      }
       spinner.stop();
       return data;
     } catch (error) {

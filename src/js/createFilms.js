@@ -4,6 +4,7 @@ import { createPagination, paginationSettings } from './pagination';
 import { HOME_SEARCH_TYPE, QUERY_SEARCH_TYPE } from './searchTypes';
 const movie = new MovieApiService();
 
+
 // рендерит карточки популярных фильмов
 export async function createFilmsByPopular() {
   try {
@@ -26,6 +27,7 @@ export async function createFilmsByPopular() {
 export async function createFilmsBySearch(searchQuery) {
   const paginationEl = document.querySelector('#tui-pagination-container');
   const containerCard = document.querySelector('.container-card');
+  const mainContainerPlaceholder = document.querySelector('.container-empty');
   // console.log(optionBySearch.searchType);
   try {
     const movies = await movie.fetchByQuery(searchQuery);
@@ -45,7 +47,11 @@ export async function createFilmsBySearch(searchQuery) {
     // console.log(err);
     showRequestError();
     paginationEl.innerHTML = '';
+    containerCard.innerHTML = '';
+  
+    console.log(mainContainerPlaceholder);
+    mainContainerPlaceholder.classList.remove('.visually-hidden')
     // containerCard.innerHTML = '';
-    createFilmsByPopular();
+    // createFilmsByPopular();
   }
 }
