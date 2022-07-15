@@ -6,25 +6,14 @@ import { updateWatched } from './updateLib';
 const movie = new MovieApiService();
 
 const containerCard = document.querySelector('.container-card');
-// const containerModal = document.querySelector('.modal__card-content');
+
 const errorMessage = document.querySelector('.header-error-container');
 
 // Функция для отображения карточек
 export async function renderMarkup(movies) {
-  // console.log(movies);
   containerCard.innerHTML = await makeMarkup(movies.results);
 }
 
-// export async function renderMarkupByQ(searchQuery) {
-//   try{
-//   const array = await movie.fetchByQuery(searchQuery);
-//   if(array.length===0){
-//       showRequestError()
-//     }
-//   console.log(array.length);
-//   containerCard.innerHTML=await makeMarkup(array);}
-//   catch(error){showRequestError()}
-//   }
 
 function makeMarkup(array) {
   return array
@@ -57,7 +46,7 @@ function makeMarkup(array) {
         acc.push(movieGenre.name);
         return acc.slice(0, 3);
       }, []);
-      // console.log(genreMain.length);
+      
       if (genreMain.length === 3) {
         genreMain.splice(2, 1, 'Other');
       }
@@ -92,10 +81,10 @@ function makeMarkup(array) {
 
 export async function makeMarkupLib(array) {
   return array
-    .map(({ poster_path, id, original_title, release_date, genres }) => {
+    .map(({ poster_path, id, original_title, release_date, genres, vote_average }) => {
       const newReleaseDate = release_date.split('-')[0];
       const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
-      //       console.log(allgenres);
+      
       if (allgenres.length === 3) {
         allgenres.splice(2, 1, 'Other');
       }
@@ -120,9 +109,9 @@ export async function makeMarkupLib(array) {
 export async function openModal(movieId) {
   const containerModal = document.querySelector('.modal__card-content');
   const data = await movie.fetchById(movieId);
-  // console.log(data);
+  
   containerModal.innerHTML = await makeMarkupModal(data);
-  // console.log(data);
+  
   const modalCloseBtn = document.querySelector('.modal__close');
   const modal = document.querySelector('.modal__card-overlay');
 
@@ -131,7 +120,7 @@ export async function openModal(movieId) {
   function closeByCross() {
     modalCloseBtn.removeEventListener('click', closeByCross);
     modal.classList.add('is-hidden');
-    // console.log("модалка закрита(крестиком)");
+    
   }
 
   //МОДАЛКА ЗАКРЫТА ФОНОМ
@@ -140,7 +129,7 @@ export async function openModal(movieId) {
     if (e.target === modal) {
       modal.removeEventListener('click', closeByOverlay);
       modal.classList.add('is-hidden');
-      // console.log("модалка закрита(фоном)");
+      
     }
   }
 
@@ -150,7 +139,7 @@ export async function openModal(movieId) {
     if (e.keyCode === 27) {
       window.removeEventListener('keydown', closeByEsc);
       modal.classList.add('is-hidden');
-      // console.log("модалка закрита(Esc)");
+      
     }
   }
 
@@ -163,7 +152,7 @@ export async function openModal(movieId) {
 
   saveQueueBtn();
   async function saveQueueBtn() {
-    // const data = await movie.fetchById(movieId);
+    
     const parsing = storage.readItem('qu');
     if (parsing) {
       const movieTitle = data.title;
@@ -181,7 +170,7 @@ export async function openModal(movieId) {
   }
   saveWatchedBtn();
   async function saveWatchedBtn() {
-    // const data = await movie.fetchById(movieId);
+    
     const parsing = storage.readItem('watched');
     if (parsing) {
       const movieTitle = data.title;
@@ -200,7 +189,7 @@ export async function openModal(movieId) {
   // ФУНКЦИИ ДОБАВЛЕНИЯ И ПЕРЕЗАПИСИ В LOCALSTORAGE
 
   addToWatched.addEventListener('click', async () => {
-    // const data = await movie.fetchById(movieId);
+    
     const result = storage.readItem('watched', []);
     const parsing = storage.readItem('qu');
     if (parsing) {
@@ -230,7 +219,7 @@ export async function openModal(movieId) {
   });
 
   addToQueue.addEventListener('click', async () => {
-    // const data = await movie.fetchById(movieId);
+    
     const result = storage.readItem('qu', []);
     const parsing = storage.readItem('watched');
     if (parsing) {
@@ -304,7 +293,7 @@ function makeMarkupModal({
   vote_count,
 }) {
   const allgenres = genres.flatMap(genre => genre.name).slice(0, 3);
-  // console.log(allgenres)
+  
   allgenres.slice(0, 3);
   let newGenreModal = allgenres.join(', ') 
   if (newGenreModal.length === 0) { 
