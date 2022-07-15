@@ -28,7 +28,7 @@ export async function renderMarkup(movies) {
 
 function makeMarkup(array) {
   return array
-    .map(({ poster_path, id, original_title, release_date, genre_ids }) => {
+    .map(({ poster_path, id, original_title, release_date, genre_ids, vote_average }) => {
       const newReleaseDate = release_date.split('-')[0];
       const ganresArray = [
         { id: 28, name: 'Action' },
@@ -74,6 +74,7 @@ function makeMarkup(array) {
       <div class="container-card_single-card" data-id="${id}" >
         
           <div class="poster">
+            <span class="discription__modal-text-vote info_rating">${vote_average.toFixed(1)}</span>
               <img class="poster_img" loading="lazy" src="${posterImageUrl}">
           </div>
           <div class="info">
@@ -101,6 +102,7 @@ export async function makeMarkupLib(array) {
       return `
       <div class="container-card_single-card" data-id="${id}" >
         <div class="poster">
+            <span class="discription__modal-text-vote info_rating">${vote_average.toFixed(1)}</span>
             <img class="poster_img" loading="lazy" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${original_title}">
         </div>
         <div class="info">
