@@ -87,7 +87,7 @@
 }
 
 .modal__close:hover .modal-close-btn__icon {
-    stroke: #FF6B01;
+    stroke: $header-button-color;
 }
 
 .modal__img {
@@ -114,7 +114,7 @@
     font-weight: 500;
     font-size: 30px;
     line-height: 35px;
-    color: #000000;
+    color: $text-color;
     text-transform: uppercase;
     @media screen and(min-width: 768px) and (max-width: 1279px) {
         font-size: 20px;
@@ -205,15 +205,15 @@
     line-height: 16px;
     display: flex;
     align-items: center;
-    color: #000000;
+    color: $text-color;
 }
 
 .discription__modal-text-vote {
-    background: #FF6B01;
+    background: $header-button-color;
     border-radius: 5px;
     padding: 1px 10px;
     line-height: 14px;
-    color: #FFFFFF;
+    color: $primary-white-color;
 }
 
 .discription__modal-text-slash {
@@ -223,7 +223,7 @@
 }
 
 .discription__modal-text-votes {
-    background: #F7F7F7;
+    background: $footer-background;
     border-radius: 5px;
     padding: 1px 10px;
     line-height: 14px;
@@ -249,7 +249,7 @@
     font-size: 12px;
     line-height: 16px;
     text-transform: uppercase;
-    color: #000000;
+    color: $text-color;
     margin-bottom: 8px;
     @media screen and(max-width:767px) {
         margin-bottom: 10px;
@@ -262,7 +262,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 20px;
-    color: #000000;
+    color: $text-color;
     overflow-y: auto;
     overflow-x: hidden;
     height: 160px;
@@ -329,16 +329,16 @@
 
 .modal__btn-1add,
 .modal__btn-2add {
-    background: #FF6B01;
-    color: #FFFFFF;
+    background: $header-button-color;
+    color: $primary-white-color;
     border: none;
     box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.5);
 }
 
 .modal__btn-1remove,
 .modal__btn-2remove {
-    background: #ffffff;
-    color: #000000;
+    background: $primary-white-color;
+    color: $text-color;
     border: 1px solid #000;
     box-shadow: 0px -5px 10px 2px rgba(0, 0, 0, 0.5);
 }

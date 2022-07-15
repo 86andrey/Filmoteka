@@ -93,6 +93,7 @@
     height: 398px;
     max-width: 100%;
     width: 100%;
+    position: relative;
     @media screen and (min-width: 768px) {
             margin-bottom: 8px;
             height: 455px;
@@ -146,7 +147,13 @@
     color: $cards-text;
 }  
 
-
+.info_rating {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    margin: 0;
+    box-shadow: 0px 0px 20px 10px rgba(255, 255, 255);
+}
 // стиль контейнера с заглушкой
 .container-placeholder{
     // padding-top: 20px;
