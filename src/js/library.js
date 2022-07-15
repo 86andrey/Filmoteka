@@ -46,7 +46,7 @@ async function renderWatched() {
   const parsing = storage.readItem('watched');
   if (parsing) {
     const parsingPage = addPageToArray(1, parsing);
-    console.log(parsingPage);
+ 
     if (parsingPage.total_results > 20) {
       createPagination(parsingPage)
       paginationSettings.searchType = WATCHED_SEARCH_TYPE;
